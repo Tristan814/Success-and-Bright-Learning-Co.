@@ -11,6 +11,10 @@ import SoftwareDev from "./assets/SoftwareDev.jpg";
 import InCompanyT from "./assets/In-CompanyT.jpg";
 import ITStrategy from "./assets/ITStrat.jpg";
 import OpenCalendar from "./assets/Open-CalendarT.jpg";
+import youtube from "./assets/youtube-icon.png";
+import facebook from "./assets/facebook-icon.png";
+import { useState, useEffect } from "react";
+
 // const MainPage = () => {
 //     return (
 // <div className="container">
@@ -26,11 +30,51 @@ import OpenCalendar from "./assets/Open-CalendarT.jpg";
 //     )
 // };
 // export default MainPage; 
+
+function Header() {
+  const [hidden, setHidden] = useState(false);
+  const [lastScroll, setLastScroll] = useState(0);
+
+  useEffect(() => {
+    function handleScroll() {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll > lastScroll && currentScroll > 80) {
+        setHidden(true);   // hide header
+      } else {
+        setHidden(false);  // show header
+      }
+
+      setLastScroll(currentScroll);
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScroll]);
+
+  return (
+    <header className={`header ${hidden ? "hidden" : ""}`}>
+      <div className="logo-container">
+        <img src={logo} alt="Logo" className="logo-image" />
+        <div className="logo-text">Success & Bright Learning</div>
+      </div>
+
+      <nav className="nav">
+        <a href="#frontp">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#events">Events</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact Us</a>
+      </nav>
+    </header>
+  );
+}
+
 const MainPage = () => {
   return (
     <div id="frontp" className="main-page">
-      {/* Header Section */}
-      <header className="header">
+      {/* <header className={`header ${hidden ? "hidden" : ""}`}>
   <div className="logo-container" >
     <img src={logo} alt="Logo" className="logo-image" />
     <div className="logo-text">Success & Bright Learning</div>
@@ -43,8 +87,9 @@ const MainPage = () => {
           <a href="#testimonials">Testimonials</a>
           <a href="#contact">Contact Us</a>
         </nav>
-      </header>
-
+      </header> */}
+      
+        <Header />
 
       <div className="frontp">
         <h1>Welcome to Success & Bright Learning</h1>
@@ -217,15 +262,15 @@ const MainPage = () => {
           <div className="contact-info">
             <div className="info-item">
               <strong>📍 Address:</strong>
-              <p>123 Tech Street, Silicon Valley, CA 94025</p>
+              <p>452 Cabildo St. 452 Cabildo St, Intramuros, Manila, 1014 Metro Manila, Philippines</p>
             </div>
             <div className="info-item">
               <strong>📧 Email:</strong>
-              <p>info@techcorp.com</p>
+              <p>edwin.cordenete@gmail.com</p>
             </div>
             <div className="info-item">
               <strong>📞 Phone:</strong>
-              <p>+1 (555) 123-4567</p>
+              <p>+639236652058</p>
             </div>
           </div>
           <form className="contact-form">
@@ -239,11 +284,31 @@ const MainPage = () => {
 
       {/* Footer Section */}
       <footer className="footer">
-        <p>Success & Brigth Learning</p>
-        <p>We offer trainings, webinars and tutorials. We understand your needs and we will 
+        <div className="footer-text">
+        <div className="set-to-row">
+        <h1>Success & Bright Learning</h1>
+        <img src={logo} alt="Logo" className="logo-footer" />
+            </div>
+            <div className="set-to-margin-top">
+            <p className="set-to-margin-bottom">We offer trainings, webinars and tutorials. We understand your needs and we will 
             cater the kind of learnings that will satisfy your needs. Do not hesitate to contact us.</p>
-        <p>&copy; 2020 Success & Bright Learning Co. All rights reserved.</p>
-        <p>Registration No.: 2007091</p>
+            <p>&copy; 2020 Success & Bright Learning Co. All rights reserved. | Registration No.: 2007091</p>
+            <div className="set-to-row2">
+            <a href="https://www.facebook.com/successandbrightlearning/#" target="_blank" rel="noopener noreferrer">
+                <div className="footer-icon">
+                <img src={facebook} alt="Facebook" />
+                </div>
+            </a>
+            
+            <a href="https://www.youtube.com/@SuccessBrightLearning" target="_blank" rel="noopener noreferrer">
+                <div className="footer-icon">
+                <img src={youtube} alt="YouTube" />
+                </div>
+            </a>
+            </div>
+            </div>
+        
+        </div>
       </footer>
     </div>
   );
