@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Success-and-Bright-Learning-Co./static/css/main.f855e6bc.css",
+    "main.js": "/Success-and-Bright-Learning-Co./static/js/main.af284267.js",
+    "static/js/453.754c8750.chunk.js": "/Success-and-Bright-Learning-Co./static/js/453.754c8750.chunk.js",
+    "static/media/logo.svg": "/Success-and-Bright-Learning-Co./static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/Success-and-Bright-Learning-Co./index.html",
+    "main.f855e6bc.css.map": "/Success-and-Bright-Learning-Co./static/css/main.f855e6bc.css.map",
+    "main.af284267.js.map": "/Success-and-Bright-Learning-Co./static/js/main.af284267.js.map",
+    "453.754c8750.chunk.js.map": "/Success-and-Bright-Learning-Co./static/js/453.754c8750.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.af284267.js"
+  ]
+}
