@@ -13,23 +13,13 @@ import ITStrategy from "./assets/ITStrat.jpg";
 import OpenCalendar from "./assets/Open-CalendarT.jpg";
 import youtube from "./assets/youtube-icon.png";
 import facebook from "./assets/facebook-icon.png";
+import event1 from "./assets/event1.jpg";
+import event2 from "./assets/event2.jpg";
+import testi1 from "./assets/testi1.jpg";
+import testi2 from "./assets/testi2.jpg";
+import testi3 from "./assets/testi3.jpg";
 import { useState, useEffect } from "react";
 
-// const MainPage = () => {
-//     return (
-// <div className="container">
-//     <header className="header">
-//         <div className="logow">Success & Bright Learning</div>
-//         <nav className="nav">
-//             <a ></a>
-//         </nav>
-//         </header>
-
-
-// </div>
-//     )
-// };
-// export default MainPage; 
 
 function Header() {
   const [hidden, setHidden] = useState(false);
@@ -63,6 +53,7 @@ function Header() {
         <a href="#frontp">Home</a>
         <a href="#about">About Us</a>
         <a href="#services">Services</a>
+        <a href="#training">Training Course</a>
         <a href="#events">Events</a>
         <a href="#testimonials">Testimonials</a>
         <a href="#contact">Contact Us</a>
@@ -71,31 +62,98 @@ function Header() {
   );
 }
 
+const eventSlides = [
+  { id: 1, image: event1 },
+  { id: 2, image: event2 },
+
+];
+
+
 const MainPage = () => {
+
+const [isPastMode, setIsPastMode] = useState(true);
+
+
+const [currentPast, setCurrentPast] = useState(0);
+const pastEvents = [
+  { title: "JavaScript Bootcamp 2024", text: "A hands-on workshop teaching JavaScript fundamentals." },
+  { title: "Robotics Training Day", text: "Students learned basic robotics and automation." },
+  { title: "Math Competition 2023", text: "A school-wide math competition with exciting prizes." }
+];
+
+
+const [currentUpcoming, setCurrentUpcoming] = useState(0);
+const upcomingEvents = [
+  { title: "Science Fair 2026", text: "Present your innovative science experiments and win awards." },
+  { title: "Web Design Workshop", text: "Learn how to design modern responsive websites." },
+  { title: "STEM Robotics Expo", text: "A full-day expo showcasing the latest in robotics." }
+];
+
+
+  const [currentEvent, setCurrentEvent] = useState(0);
+
+
+  const nextEvent = () => setCurrentEvent((p) => (p + 1) % eventSlides.length);
+  const prevEvent = () => setCurrentEvent((p) => (p - 1 + eventSlides.length) % eventSlides.length);
+  useEffect(() => {
+    const t = setInterval(nextEvent, 5000);
+    return () => clearInterval(t);
+
+  }, []); 
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus(null);
+
+    // Basic client-side validation
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      setStatus({ ok: false, text: 'Please fill in all fields.' });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setStatus({ ok: true, text: 'Message sent successfully!' });
+        // Clear form
+        setName('');
+        setEmail('');
+        setMessage('');
+      } else {
+        setStatus({ ok: false, text: data?.error || 'Something went wrong.' });
+      }
+    } catch (err) {
+      setStatus({ ok: false, text: 'Network error. Please try again.' });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div id="frontp" className="main-page">
-      {/* <header className={`header ${hidden ? "hidden" : ""}`}>
-  <div className="logo-container" >
-    <img src={logo} alt="Logo" className="logo-image" />
-    <div className="logo-text">Success & Bright Learning</div>
-  </div>
-        <nav className="nav">
-          <a href="#frontp">Home</a>
-          <a href="#about">About Us</a>
-          <a href="#services">Services</a>
-          <a href="#events">Events</a>
-          <a href="#testimonials">Testimonials</a>
-          <a href="#contact">Contact Us</a>
-        </nav>
-      </header> */}
-      
+
         <Header />
 
       <div className="frontp">
         <h1>Welcome to Success & Bright Learning</h1>
         <p>Tools To Help You Succeed</p>
         <p>Offering In-Depth Training For Your Team</p>
-        {/* <button className="cta-button">Get Started</button> */}
+
       </div>
                     
       <div id="about" className="about">
@@ -113,78 +171,67 @@ const MainPage = () => {
               individuals who can live joyfully and successfully everyday.
             </p>
           </div>
-          {/* <div className="about-stats">
-            <div className="stat">
-              <h3>500+</h3>
-              <p>Projects Completed</p>
-            </div>
-            <div className="stat">
-              <h3>200+</h3>
-              <p>Happy Clients</p>
-            </div>
-            <div className="stat">
-              <h3>50+</h3>
-              <p>Team Members</p>
-            </div>
-          </div> */}
+
           
         </div>
       </div>
+
     <img src={internship} alt="internship" className="internship-image" />
+
       {/* Services Section */}
       <div id="services" className="services">
         <h2>Our Services</h2>
         <div className="services-grid">
           <div className="service-card">
-            {/* <div className="service-icon">💻</div> */}
+         
             <img src={ITConsult} alt="Image" className="image-service" />
             <h3>IT Consulting</h3>
             <p>We analyze your business needs and help you make strategic decisions on the 
                 fast and successful implementation of business-critical solutions.</p>
           </div>
           <div className="service-card">
-            {/* <div className="service-icon">📱</div> */}
+       
             <img src={Financial} alt="Image" className="image-service" />
             <h3>Financial Advice/Literacy</h3>
             <p>We provide scalable and cost-effective cloud solutions for businesses of all sizes. Our team of experts can help you 
                 migrate your applications and data to the cloud, ensuring maximum performance and security.</p>
           </div>
           <div className="service-card">
-            {/* <div className="service-icon">☁️</div> */}
+
             <img src={NetworkSec} alt="Image" className="image-service" />
             <h3>Network Security</h3>
             <p>Our network security services help protect your business from cyber attacks and data breaches. We can provide comprehensive 
                 security assessments, implement firewalls, and establish secure remote access protocols.</p>
           </div>
           <div className="service-card">
-            {/* <div className="service-icon">🔒</div> */}
+      
             <img src={DataAnalytics} alt="Image" className="image-service" />
             <h3>Data Analytics</h3>
             <p>We help businesses harness the power of data to gain insights and make informed decisions. Our team can help you 
                 collect, analyze, and visualize your data to uncover trends, patterns, and opportunities.</p>
           </div>
             <div className="service-card">
-            {/* <div className="service-icon">☁️</div> */}
+
             <img src={SoftwareDev} alt="Image" className="image-service" />
             <h3>Software Development</h3>
             <p>We offer custom software development services to help you build scalable and reliable applications. 
                 Our team can work with you to design, develop, test, and deploy software solutions tailored to your specific needs.</p>
           </div>
           <div className="service-card">
-            {/* <div className="service-icon">🔒</div> */}
+
             <img src={ITStrategy} alt="Image" className="image-service" />
             <h3>IT Strategy Consulting</h3>
             <p>Our IT strategy consulting services help you align your technology investments with your business goals. We can help you 
                 develop a roadmap for digital transformation, optimize your IT operations, and identify new opportunities.</p>
           </div>
           <div className="service-card">
-            {/* <div className="service-icon">🔒</div> */}
+
             <img src={OpenCalendar} alt="Image" className="image-service" />
             <h3>Open Training Calendar</h3>
             <p>This is an online classroom theoretical and hands-on training which is available year-round at your convenience.</p>
           </div>
           <div className="service-card">
-            {/* <div className="service-icon">🔒</div> */}
+
             <img src={InCompanyT} alt="Image" className="image-service" />
             <h3>In-Company Training</h3>
             <p>Select any theoretical and hands-on training from our extensive training portfolio to be organized at a 
@@ -193,69 +240,204 @@ const MainPage = () => {
         </div>
       </div>
 
-<div id="events" className="events">
-        <h2>Events</h2>
-        <div className="about-content">
-                      <div className="about-stats">
-            <div className="stat">
-              <h3>500+</h3>
-              <p>Projects Completed</p>
-            </div>
-            <div className="stat">
-              <h3>200+</h3>
-              <p>Happy Clients</p>
-            </div>
-            <div className="stat">
-              <h3>50+</h3>
-              <p>Team Members</p>
-            </div>
-          </div>
-          <div className="about-text">
-            <p>
-              TechCorp Solutions is a leading technology company specializing in 
-              software development, cloud solutions, and digital transformation.
-            </p>
-            <p>
-              Founded in 2015, we have been serving clients worldwide with 
-              cutting-edge technology solutions and exceptional service.
-            </p>
-          </div>
-
+{/* TRAINING */}
+<div id="training" className="training">
+  <h2>Our Training Courses</h2>
+  
+  <div className="training-grid landscape">
+    {/* 1 */}
+    <div className="training-card landscape-card">
+      
+      <div className="training-info">
+        <div className="icon-row">
+            <div className="service-icon">💻</div>
+            <h3>Computer Basics 101</h3>
         </div>
+        
+        <p>This learning session is part of our initiative to educate everyone - little or no knowledge at all - in learning the basic computer operations. The course include the basics of computer operations, 
+            Cloud Computing and Office Suite (i.e. Documents, Spreadsheets, Presentations & Databases).</p>
+      </div>
+    </div>
+
+    {/* 2 */}
+    <div className="training-card landscape-card">
+      <div className="training-info">
+         <div className="icon-row">
+            <div className="service-icon">🎨</div>
+            <h3>Graphics Design</h3>
+        </div>
+        
+        <p>This learning session provides the process of visual communication and problem-solving through the use of typography, photography, iconography and illustration. It focuses on the logic of 
+            displaying elements in interactive designs to optimize the user experience.</p>
+      </div>
+    </div>
+
+    {/* 3 */}
+    <div className="training-card landscape-card">
+      <div className="training-info">
+        <div className="icon-row">
+            <div className="service-icon">🌐</div>
+            <h3>Web Design & Development</h3>
+        </div>
+        <p>This learning session provides the process of creating websites which is front end design. It encompasses several different aspects,
+             including webpage layout, content production, and graphic design using the different technology and CMS.</p>
+      </div>
+    </div>
+
+    {/* 4 */}
+    <div className="training-card landscape-card">
+      <div className="training-info">
+                <div className="icon-row">
+            <div className="service-icon">📐</div>
+        <h3>CAD 2D Drawings & 3D Modelling</h3>
+        </div>
+        <p>This learning session provides the use of computers to create two-dimensional layout design and three-dimensional modeling. It will equip educators, students, engineers 
+            and professionals on how to utilize CAD software for 2D & 3D drawing.</p>
+      </div>
+    </div>
+
+    {/* 5 */}
+    <div className="training-card landscape-card">
+      <div className="training-info">
+        <div className="icon-row">
+            <div className="service-icon">🧑‍💻</div>
+        <h3>.Net Programming</h3>
+        </div>
+        <p>This learning session provides a framework that provides a programming guidelines that can be used to develop a wide range of application from web to mobile to 
+            Windows-based applications. The .NET framework can work with several programming languages such as C#, VB.NET, C++ and F#.</p>
+      </div>
+    </div>
+
+    {/* 6 */}
+    <div className="training-card landscape-card">
+      <div className="training-info">
+        <div className="icon-row">
+            <div className="service-icon">📊</div>
+        <h3>Financial Planning & Management</h3>
+        </div>
+        <p>This learning session is a vital activity in any organization. It is the process of planning, organizing, controlling and monitoring financial resources 
+            with a view to achieve organizational goals and objectives.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+     
+
+{/* EVENTS SECTION */}
+<div id="events" className="events">
+  <h2>Past and Upcoming Events</h2>
+
+  <div className="events-content">
+
+    <div className="left-events">
+      <div className="image-wrapper">
+
+        <button
+          className="slider-icon-arrow arrow-left"
+          onClick={prevEvent}
+        >
+          ‹
+        </button>
+
+        <img
+          src={eventSlides[currentEvent].image}
+          alt={`Event ${currentEvent + 1}`}
+          className="event-image"
+        />
+
+        <button
+          className="slider-icon-arrow arrow-right"
+          onClick={nextEvent}
+        >
+          ›
+        </button>
+
+      </div>
+    </div>
+
+   
+    <div className="right-box">
+
+      <h3 className="right-title">
+        {isPastMode ? "Past Events" : "Upcoming Events"}
+      </h3>
+
+      <div className="event-textbox">
+
+        <h4 className="event-title">
+          {isPastMode 
+            ? pastEvents[currentPast].title
+            : upcomingEvents[currentUpcoming].title}
+        </h4>
+
+        <p className="event-desc">
+          {isPastMode 
+            ? pastEvents[currentPast].text
+            : upcomingEvents[currentUpcoming].text}
+        </p>
+
+        
       </div>
 
+      {/* MINI LIST + SWITCH MODE BUTTON */}
+      <div className="events-list-wrapper">
+
+        <div className="events-list-mini">
+          {(isPastMode ? pastEvents : upcomingEvents).map((ev, idx) => (
+            <button
+              key={idx}
+              className={
+                "events-list-item " +
+                (
+                  isPastMode 
+                    ? (idx === currentPast ? "selected" : "") 
+                    : (idx === currentUpcoming ? "selected" : "")
+                )
+              }
+              onClick={() => {
+                if (isPastMode) setCurrentPast(idx);
+                else setCurrentUpcoming(idx);
+              }}
+            >
+              <div className="mini-title">{ev.title}</div>
+              {/* <div className="mini-sub">
+                {ev.text.slice(0, 70)}{ev.text.length > 70 ? "..." : ""}
+              </div> */}
+            </button>
+          ))}
+        </div>
+
+        <button 
+          className="switch-mode-btn"
+          onClick={() => setIsPastMode(!isPastMode)}
+        >
+          {isPastMode ? "View Upcoming Events →" : "← View Past Events"}
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{/* TESTIMONIALS */}
 <div id="testimonials" className="testimonials">
         <h2>Testimonials</h2>
-        <div className="about-content">
-                      <div className="about-stats">
-            <div className="stat">
-              <h3>500+</h3>
-              <p>Projects Completed</p>
-            </div>
-            <div className="stat">
-              <h3>200+</h3>
-              <p>Happy Clients</p>
-            </div>
-            <div className="stat">
-              <h3>50+</h3>
-              <p>Team Members</p>
-            </div>
+        <div className="testimonials-content">
+        <div className="image1">
+             <img src={testi1} alt="Image" className="testiimage" />
           </div>
-          <div className="about-text">
-            <p>
-              TechCorp Solutions is a leading technology company specializing in 
-              software development, cloud solutions, and digital transformation.
-            </p>
-            <p>
-              Founded in 2015, we have been serving clients worldwide with 
-              cutting-edge technology solutions and exceptional service.
-            </p>
+        <div className="image2">
+            <img src={testi2} alt="Image" className="testiimage" />
           </div>
-
+            
         </div>
+        <img src={testi3} alt="Image" className="testiimage2" />
       </div>
 
-      {/* Contact Section */}
+{/* CONTACT US */}
       <div id="contact" className="contact">
         <h2>Contact Us</h2>
         <div className="contact-content">
@@ -282,11 +464,11 @@ const MainPage = () => {
         </div>
       </div>
 
-      {/* Footer Section */}
-      <footer className="footer">
+{/* FOOTER */}
+      <footer className="footer">   
         <div className="footer-text">
         <div className="set-to-row">
-        <h1>Success & Bright Learning</h1>
+        <h1>Success & Bright Learning Co.</h1>
         <img src={logo} alt="Logo" className="logo-footer" />
             </div>
             <div className="set-to-margin-top">
