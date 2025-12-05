@@ -455,15 +455,51 @@ const upcomingEvents = [
               <p>+639236652058</p>
             </div>
           </div>
-          <form className="contact-form">
-            <input type="text" placeholder="Your Name" />
-            <input type="email" placeholder="Your Email" />
-            <textarea placeholder="Your Message" rows="5"></textarea>
-            <button type="submit">Send Message</button>
-          </form>
+          <form onSubmit={handleSubmit} className="contact-form" noValidate>
+
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Your Name"
+          required
+        />
+
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="name@example.com"
+          required
+        />
+
+        <textarea
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Your Message"
+          rows={6}
+          required
+        />
+
+      <button type="submit" disabled={loading} className="send-btn">
+        {loading ? 'Sending...' : 'Send Message'}
+      </button>
+
+      {status && (
+        <p
+          role="status"
+          style={{
+            color: status.ok ? 'green' : 'red',
+            marginTop: 8,
+          }}
+        >
+          {status.text}
+        </p>
+      )}
+    </form>
         </div>
       </div>
-
+    
 {/* FOOTER */}
       <footer className="footer">   
         <div className="footer-text">

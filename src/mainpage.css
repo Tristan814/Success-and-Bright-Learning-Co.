@@ -610,6 +610,10 @@ transition: transform 0.1s ease;
   gap: 30px;
 }
 
+.field{
+    
+}
+
 .info-item {
   background-color: white;
   padding: 20px;
