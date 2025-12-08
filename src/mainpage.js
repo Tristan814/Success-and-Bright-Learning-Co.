@@ -109,10 +109,10 @@ const [name, setName] = useState('');
 
 const handleSubmit = async (e) => {
     e.preventDefault();
-    // Clear previous status
+
     setStatus(null); 
 
-    // Frontend validation
+
     if (!name.trim() || !email.trim() || !message.trim()) {
       setStatus({ ok: false, text: "Please fill in all fields." });
       return;
@@ -120,7 +120,7 @@ const handleSubmit = async (e) => {
 
     setLoading(true);
     try {
-      // API call to the Node.js server
+
       const res = await fetch("http://localhost:4002/send", {
         method: "POST",
         headers: {
@@ -133,16 +133,16 @@ const handleSubmit = async (e) => {
 
       if (data.success) {
         setStatus({ ok: true, text: "Message sent successfully!" });
-        // Clear inputs on success
+ 
         setName("");
         setEmail("");
         setMessage("");
       } else {
-        // Handle server-side errors (e.g., invalid email)
+
         setStatus({ ok: false, text: data.error || "Something went wrong." });
       }
     } catch (err) {
-      // Handle network errors (e.g., server is down)
+
       setStatus({ ok: false, text: "Network error. Please try again." });
     } finally {
       setLoading(false);
@@ -251,7 +251,7 @@ const handleSubmit = async (e) => {
   <h2>Our Training Courses</h2>
   
   <div className="training-grid landscape">
-    {/* 1 */}
+
     <div className="training-card landscape-card">
       
       <div className="training-info">
@@ -265,7 +265,7 @@ const handleSubmit = async (e) => {
       </div>
     </div>
 
-    {/* 2 */}
+
     <div className="training-card landscape-card">
       <div className="training-info">
          <div className="icon-row">
@@ -278,7 +278,7 @@ const handleSubmit = async (e) => {
       </div>
     </div>
 
-    {/* 3 */}
+
     <div className="training-card landscape-card">
       <div className="training-info">
         <div className="icon-row">
@@ -290,7 +290,7 @@ const handleSubmit = async (e) => {
       </div>
     </div>
 
-    {/* 4 */}
+
     <div className="training-card landscape-card">
       <div className="training-info">
                 <div className="icon-row">
@@ -302,7 +302,7 @@ const handleSubmit = async (e) => {
       </div>
     </div>
 
-    {/* 5 */}
+
     <div className="training-card landscape-card">
       <div className="training-info">
         <div className="icon-row">
@@ -314,7 +314,7 @@ const handleSubmit = async (e) => {
       </div>
     </div>
 
-    {/* 6 */}
+
     <div className="training-card landscape-card">
       <div className="training-info">
         <div className="icon-row">
@@ -387,7 +387,7 @@ const handleSubmit = async (e) => {
         
       </div>
 
-      {/* MINI LIST + SWITCH MODE BUTTON */}
+
       <div className="events-list-wrapper">
 
         <div className="events-list-mini">
@@ -408,9 +408,6 @@ const handleSubmit = async (e) => {
               }}
             >
               <div className="mini-title">{ev.title}</div>
-              {/* <div className="mini-sub">
-                {ev.text.slice(0, 70)}{ev.text.length > 70 ? "..." : ""}
-              </div> */}
             </button>
           ))}
         </div>
