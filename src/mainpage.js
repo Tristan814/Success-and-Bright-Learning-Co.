@@ -101,48 +101,54 @@ const upcomingEvents = [
 
   }, []); 
 
-  const [name, setName] = useState('');
+const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState(null); // { ok: boolean, text: string }
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus(null);
+    // Clear previous status
+    setStatus(null); 
 
-    // Basic client-side validation
+    // Frontend validation
     if (!name.trim() || !email.trim() || !message.trim()) {
-      setStatus({ ok: false, text: 'Please fill in all fields.' });
+      setStatus({ ok: false, text: "Please fill in all fields." });
       return;
     }
 
     setLoading(true);
     try {
-      const res = await fetch('/api/send-email', {
-        method: 'POST',
+      // API call to the Node.js server
+      const res = await fetch("http://localhost:4002/send", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ name, email, message }),
       });
 
       const data = await res.json();
-      if (res.ok) {
-        setStatus({ ok: true, text: 'Message sent successfully!' });
-        // Clear form
-        setName('');
-        setEmail('');
-        setMessage('');
+
+      if (data.success) {
+        setStatus({ ok: true, text: "Message sent successfully!" });
+        // Clear inputs on success
+        setName("");
+        setEmail("");
+        setMessage("");
       } else {
-        setStatus({ ok: false, text: data?.error || 'Something went wrong.' });
+        // Handle server-side errors (e.g., invalid email)
+        setStatus({ ok: false, text: data.error || "Something went wrong." });
       }
     } catch (err) {
-      setStatus({ ok: false, text: 'Network error. Please try again.' });
+      // Handle network errors (e.g., server is down)
+      setStatus({ ok: false, text: "Network error. Please try again." });
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <div id="frontp" className="main-page">
@@ -438,67 +444,71 @@ const upcomingEvents = [
       </div>
 
 {/* CONTACT US */}
-      <div id="contact" className="contact">
-        <h2>Contact Us</h2>
-        <div className="contact-content">
-          <div className="contact-info">
-            <div className="info-item">
-              <strong>📍 Address:</strong>
-              <p>452 Cabildo St. 452 Cabildo St, Intramuros, Manila, 1014 Metro Manila, Philippines</p>
-            </div>
-            <div className="info-item">
-              <strong>📧 Email:</strong>
-              <p>edwin.cordenete@gmail.com</p>
-            </div>
-            <div className="info-item">
-              <strong>📞 Phone:</strong>
-              <p>+639236652058</p>
-            </div>
+<div id="contact" className="contact">
+      <h2>Contact Us</h2>
+      <div className="contact-content">
+        <div className="contact-info">
+          {/* Contact Information */}
+          <div className="info-item">
+            <strong>📍 Address:</strong>
+            <p>452 Cabildo St. 452 Cabildo St, Intramuros, Manila, 1014 Metro Manila, Philippines</p>
           </div>
-          <form onSubmit={handleSubmit} className="contact-form" noValidate>
-
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Your Name"
-          required
-        />
-
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="name@example.com"
-          required
-        />
-
-        <textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Your Message"
-          rows={6}
-          required
-        />
-
-      <button type="submit" disabled={loading} className="send-btn">
-        {loading ? 'Sending...' : 'Send Message'}
-      </button>
-
-      {status && (
-        <p
-          role="status"
-          style={{
-            color: status.ok ? 'green' : 'red',
-            marginTop: 8,
-          }}
-        >
-          {status.text}
-        </p>
-      )}
-    </form>
+          <div className="info-item">
+            <strong>📧 Email:</strong>
+            <p>edwin.cordenete@gmail.com</p>
+          </div>
+          <div className="info-item">
+            <strong>📞 Phone:</strong>
+            <p>+639236652058</p>
+          </div>
         </div>
+        
+        {/* Contact Form */}
+        <form onSubmit={handleSubmit} className="contact-form" noValidate>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Your Name"
+            required
+          />
+
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="name@example.com"
+            required
+          />
+
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Your Message"
+            rows={6}
+            required
+          />
+
+          <button type="submit" disabled={loading} className="send-btn">
+            {loading ? 'Sending...' : 'Send Message'}
+          </button>
+
+          {/* Status Message */}
+          {status && (
+            <p
+              role="status"
+              style={{
+                color: status.ok ? 'green' : 'red',
+                marginTop: '8px',
+                fontWeight: 'bold',
+              }}
+            >
+              {status.text}
+            </p>
+          )}
+        </form>
       </div>
+    </div>
     
 {/* FOOTER */}
       <footer className="footer">   
