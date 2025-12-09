@@ -46,7 +46,7 @@ app.post("/send", async (req, res) => {
 
   const mailOptions = {
     from: '"Success and Bright Learning Co." <tristanaquino814@gmail.com>',
-    to: "jaquino.jamcs@gmail.com",     
+    to: "edwin.cordenete@gmail.com",     
     replyTo: `"${name}" <${email}>`,
     subject: `New Contact Form Message from ${name}`,
     
@@ -61,7 +61,7 @@ app.post("/send", async (req, res) => {
     console.log(" Email sent successfully:", info.messageId);
     console.log(` Sender Name: ${name}`);
     console.log(` Sender Email: ${email}`);
-    console.log(` Receiver: tristanaquino814@gmail.com`);
+    console.log(` Receiver: edwin.cordenete@gmail.com`);
     
 
     res.status(200).json({ 

@@ -18,6 +18,7 @@ import event2 from "./assets/event2.jpg";
 import testi1 from "./assets/testi1.jpg";
 import testi2 from "./assets/testi2.jpg";
 import testi3 from "./assets/testi3.jpg";
+import gmail from "./assets/gmail.png";
 import { useState, useEffect } from "react";
 
 
@@ -149,18 +150,241 @@ const handleSubmit = async (e) => {
     }
   };
 
+  const [selectedService, setSelectedService] = useState(null);
+  const [selectedTraining, setSelectedTraining] = useState(null);
 
+    // Services data
+  const services = [
+    {
+      id: 1,
+      image: ITConsult,
+      title: 'IT Consulting',
+      shortDesc: 'We analyze your business needs and help you make strategic decisions on the fast and successful implementation of business-critical solutions.',
+      fullDesc: 'Our IT consulting services provide comprehensive analysis of your business needs and technology infrastructure. We help you make strategic decisions for successful implementation of business-critical solutions. Our expert consultants work closely with your team to identify opportunities, optimize processes, and ensure seamless technology integration.',
+      features: [
+        'Business Process Analysis',
+        'Technology Assessment',
+        'Strategic Planning',
+        'Implementation Support',
+        'Ongoing Consultation'
+      ]
+    },
+    {
+      id: 2,
+      image: Financial,
+      title: 'Financial Advice/Literacy',
+      shortDesc: 'We provide scalable and cost-effective cloud solutions for businesses of all sizes. Our team of experts can help you migrate your applications and data to the cloud.',
+      fullDesc: 'Empower your financial future with our comprehensive financial literacy programs. We provide expert guidance on budgeting, investing, retirement planning, and wealth management. Our services are designed to help individuals and businesses make informed financial decisions.',
+      features: [
+        'Personal Financial Planning',
+        'Investment Strategies',
+        'Retirement Planning',
+        'Tax Optimization',
+        'Wealth Management'
+      ]
+    },
+    {
+      id: 3,
+      image: NetworkSec,
+      title: 'Network Security',
+      shortDesc: 'Our network security services help protect your business from cyber attacks and data breaches. We can provide comprehensive security assessments.',
+      fullDesc: 'Protect your business with our advanced network security solutions. We implement comprehensive security measures including firewalls, intrusion detection systems, and secure remote access protocols. Our team conducts regular security audits to ensure your network remains protected against evolving threats.',
+      features: [
+        'Security Assessments',
+        'Firewall Implementation',
+        'Intrusion Detection',
+        'Secure Remote Access',
+        'Vulnerability Testing'
+      ]
+    },
+    {
+      id: 4,
+      image: DataAnalytics,
+      title: 'Data Analytics',
+      shortDesc: 'We help businesses harness the power of data to gain insights and make informed decisions. Our team can help you collect, analyze, and visualize your data.',
+      fullDesc: 'Transform your raw data into actionable insights with our data analytics services. We help you collect, process, analyze, and visualize data to uncover trends, patterns, and opportunities. Our analytics solutions enable data-driven decision making across your organization.',
+      features: [
+        'Data Collection & Processing',
+        'Statistical Analysis',
+        'Predictive Modeling',
+        'Data Visualization',
+        'Business Intelligence Reports'
+      ]
+    },
+    {
+      id: 5,
+      image: SoftwareDev,
+      title: 'Software Development',
+      shortDesc: 'We offer custom software development services to help you build scalable and reliable applications. Our team can work with you to design, develop, test, and deploy.',
+      fullDesc: 'Build powerful, scalable applications with our custom software development services. From initial concept to deployment and maintenance, we deliver tailored solutions that meet your specific business requirements. Our agile development approach ensures quality and timely delivery.',
+      features: [
+        'Custom Application Development',
+        'Web & Mobile Apps',
+        'System Integration',
+        'Quality Assurance',
+        'Maintenance & Support'
+      ]
+    },
+    {
+      id: 6,
+      image: ITStrategy,
+      title: 'IT Strategy Consulting',
+      shortDesc: 'Our IT strategy consulting services help you align your technology investments with your business goals. We can help you develop a roadmap for digital transformation.',
+      fullDesc: 'Align your technology with business objectives through our IT strategy consulting. We develop comprehensive roadmaps for digital transformation, optimize IT operations, and identify new opportunities for growth. Our strategic approach ensures maximum ROI on technology investments.',
+      features: [
+        'Digital Transformation',
+        'IT Roadmap Development',
+        'Technology Optimization',
+        'Change Management',
+        'Innovation Strategy'
+      ]
+    },
+    {
+      id: 7,
+      image: OpenCalendar,
+      title: 'Open Training Calendar',
+      shortDesc: 'This is an online classroom theoretical and hands-on training which is available year-round at your convenience.',
+      fullDesc: 'Access our comprehensive training programs year-round with our Open Training Calendar. Participate in online classroom sessions that combine theoretical knowledge with hands-on practice. Learn at your own pace with flexible scheduling options.',
+      features: [
+        'Online Classroom Training',
+        'Flexible Scheduling',
+        'Hands-on Labs',
+        'Expert Instructors',
+        'Certificate of Completion'
+      ]
+    },
+    {
+      id: 8,
+      image: InCompanyT,
+      title: 'In-Company Training',
+      shortDesc: 'Select any theoretical and hands-on training from our extensive training portfolio to be organized at a location of your choice.',
+      fullDesc: 'Bring expert training directly to your organization with our In-Company Training programs. We customize our extensive training portfolio to meet your specific needs and deliver it at your preferred location. Perfect for team development and skill building.',
+      features: [
+        'Customized Curriculum',
+        'On-site Delivery',
+        'Team Training',
+        'Flexible Duration',
+        'Post-training Support'
+      ]
+    }
+  ];
+
+  // Training courses data
+  const trainings = [
+    {
+      id: 1,
+      icon: '💻',
+      title: 'Computer Basics 101',
+      shortDesc: 'This learning session is part of our initiative to educate everyone - little or no knowledge at all - in learning the basic computer operations.',
+      fullDesc: 'Perfect for beginners! This comprehensive course covers fundamental computer operations, cloud computing basics, and essential office suite applications. Learn to navigate operating systems, manage files, and use productivity tools effectively.',
+      duration: '4 weeks',
+      level: 'Beginner',
+      topics: [
+        'Computer Hardware & Software',
+        'Operating System Basics',
+        'File Management',
+        'Cloud Computing Fundamentals',
+        'Office Suite (Documents, Spreadsheets, Presentations)'
+      ]
+    },
+    {
+      id: 2,
+      icon: '🎨',
+      title: 'Graphics Design',
+      shortDesc: 'This learning session provides the process of visual communication and problem-solving through the use of typography, photography, iconography and illustration.',
+      fullDesc: 'Master the art of visual communication! Learn professional graphic design principles, typography, color theory, and industry-standard design tools. Create stunning visuals for print and digital media.',
+      duration: '6 weeks',
+      level: 'Intermediate',
+      topics: [
+        'Design Principles & Theory',
+        'Typography & Color Theory',
+        'Adobe Creative Suite',
+        'Logo & Brand Design',
+        'UI/UX Design Basics'
+      ]
+    },
+    {
+      id: 3,
+      icon: '🌐',
+      title: 'Web Design & Development',
+      shortDesc: 'This learning session provides the process of creating websites which is front end design. It encompasses webpage layout, content production, and graphic design.',
+      fullDesc: 'Build professional websites from scratch! Learn HTML, CSS, JavaScript, and modern web development frameworks. Master responsive design, user experience principles, and content management systems.',
+      duration: '8 weeks',
+      level: 'Intermediate',
+      topics: [
+        'HTML5 & CSS3',
+        'JavaScript & jQuery',
+        'Responsive Web Design',
+        'Content Management Systems',
+        'Web Performance Optimization'
+      ]
+    },
+    {
+      id: 4,
+      icon: '📐',
+      title: 'CAD 2D Drawings & 3D Modelling',
+      shortDesc: 'This learning session provides the use of computers to create two-dimensional layout design and three-dimensional modeling.',
+      fullDesc: 'Master computer-aided design! Learn professional CAD software for creating precise 2D technical drawings and realistic 3D models. Essential for engineers, architects, and design professionals.',
+      duration: '6 weeks',
+      level: 'Intermediate',
+      topics: [
+        'CAD Software Basics',
+        '2D Technical Drawing',
+        '3D Modeling Techniques',
+        'Rendering & Visualization',
+        'Project-based Learning'
+      ]
+    },
+    {
+      id: 5,
+      icon: '🧑‍💻',
+      title: '.Net Programming',
+      shortDesc: 'This learning session provides a framework that provides a programming guidelines that can be used to develop a wide range of application from web to mobile.',
+      fullDesc: 'Become a .NET developer! Learn C#, ASP.NET, and the .NET framework to build powerful applications for web, mobile, and desktop platforms. Hands-on projects included.',
+      duration: '10 weeks',
+      level: 'Advanced',
+      topics: [
+        'C# Programming',
+        'ASP.NET Core',
+        'Entity Framework',
+        'Web API Development',
+        'Database Integration'
+      ]
+    },
+    {
+      id: 6,
+      icon: '📊',
+      title: 'Financial Planning & Management',
+      shortDesc: 'This learning session is a vital activity in any organization. It is the process of planning, organizing, controlling and monitoring financial resources.',
+      fullDesc: 'Master financial management! Learn to plan, organize, control, and monitor financial resources effectively. Essential skills for business owners, managers, and financial professionals.',
+      duration: '5 weeks',
+      level: 'Intermediate',
+      topics: [
+        'Financial Planning Fundamentals',
+        'Budgeting & Forecasting',
+        'Financial Analysis',
+        'Risk Management',
+        'Investment Strategies'
+      ]
+    }
+  ];
   return (
     <div id="frontp" className="main-page">
 
         <Header />
 
-      <div className="frontp">
+      {/* <div   style={{ backgroundImage: `url(${logo})` }} className="frontp">
         <h1>Welcome to Success & Bright Learning</h1>
         <p>Tools To Help You Succeed</p>
         <p>Offering In-Depth Training For Your Team</p>
 
-      </div>
+      </div> */}
+      <div className="frontp">
+  <div className="logo-bg"></div>
+  <h1>Welcome to Success & Bright Learning</h1>
+  <p>Tools To Help You Succeed</p>
+  <p>Offering In-Depth Training For Your Team</p>
+</div>
                     
       <div id="about" className="about">
         <h2>About Us</h2>
@@ -188,145 +412,169 @@ const handleSubmit = async (e) => {
       <div id="services" className="services">
         <h2>Our Services</h2>
         <div className="services-grid">
-          <div className="service-card">
-         
-            <img src={ITConsult} alt="Image" className="image-service" />
-            <h3>IT Consulting</h3>
-            <p>We analyze your business needs and help you make strategic decisions on the 
-                fast and successful implementation of business-critical solutions.</p>
-          </div>
-          <div className="service-card">
-       
-            <img src={Financial} alt="Image" className="image-service" />
-            <h3>Financial Advice/Literacy</h3>
-            <p>We provide scalable and cost-effective cloud solutions for businesses of all sizes. Our team of experts can help you 
-                migrate your applications and data to the cloud, ensuring maximum performance and security.</p>
-          </div>
-          <div className="service-card">
-
-            <img src={NetworkSec} alt="Image" className="image-service" />
-            <h3>Network Security</h3>
-            <p>Our network security services help protect your business from cyber attacks and data breaches. We can provide comprehensive 
-                security assessments, implement firewalls, and establish secure remote access protocols.</p>
-          </div>
-          <div className="service-card">
-      
-            <img src={DataAnalytics} alt="Image" className="image-service" />
-            <h3>Data Analytics</h3>
-            <p>We help businesses harness the power of data to gain insights and make informed decisions. Our team can help you 
-                collect, analyze, and visualize your data to uncover trends, patterns, and opportunities.</p>
-          </div>
-            <div className="service-card">
-
-            <img src={SoftwareDev} alt="Image" className="image-service" />
-            <h3>Software Development</h3>
-            <p>We offer custom software development services to help you build scalable and reliable applications. 
-                Our team can work with you to design, develop, test, and deploy software solutions tailored to your specific needs.</p>
-          </div>
-          <div className="service-card">
-
-            <img src={ITStrategy} alt="Image" className="image-service" />
-            <h3>IT Strategy Consulting</h3>
-            <p>Our IT strategy consulting services help you align your technology investments with your business goals. We can help you 
-                develop a roadmap for digital transformation, optimize your IT operations, and identify new opportunities.</p>
-          </div>
-          <div className="service-card">
-
-            <img src={OpenCalendar} alt="Image" className="image-service" />
-            <h3>Open Training Calendar</h3>
-            <p>This is an online classroom theoretical and hands-on training which is available year-round at your convenience.</p>
-          </div>
-          <div className="service-card">
-
-            <img src={InCompanyT} alt="Image" className="image-service" />
-            <h3>In-Company Training</h3>
-            <p>Select any theoretical and hands-on training from our extensive training portfolio to be organized at a 
-                location of your choice. For more information or enquiries, please contact success.brigh2020@gmail.com.</p>
-          </div>
+          {services.map((service) => (
+            <div 
+              key={service.id}
+              className="service-card"
+              onClick={() => setSelectedService(service)}
+            >
+              <img src={service.image} alt={service.title} className="image-service" />
+              <h3>{service.title}</h3>
+              <p>{service.shortDesc}</p>
+              <button className="learn-more-btn">Learn More →</button>
+            </div>
+          ))}
         </div>
       </div>
 
-{/* TRAINING */}
-<div id="training" className="training">
-  <h2>Our Training Courses</h2>
-  
-  <div className="training-grid landscape">
-
-    <div className="training-card landscape-card">
-      
-      <div className="training-info">
-        <div className="icon-row">
-            <div className="service-icon">💻</div>
-            <h3>Computer Basics 101</h3>
-        </div>
-        
-        <p>This learning session is part of our initiative to educate everyone - little or no knowledge at all - in learning the basic computer operations. The course include the basics of computer operations, 
-            Cloud Computing and Office Suite (i.e. Documents, Spreadsheets, Presentations & Databases).</p>
-      </div>
-    </div>
-
-
-    <div className="training-card landscape-card">
-      <div className="training-info">
-         <div className="icon-row">
-            <div className="service-icon">🎨</div>
-            <h3>Graphics Design</h3>
-        </div>
-        
-        <p>This learning session provides the process of visual communication and problem-solving through the use of typography, photography, iconography and illustration. It focuses on the logic of 
-            displaying elements in interactive designs to optimize the user experience.</p>
-      </div>
-    </div>
-
-
-    <div className="training-card landscape-card">
-      <div className="training-info">
-        <div className="icon-row">
-            <div className="service-icon">🌐</div>
-            <h3>Web Design & Development</h3>
-        </div>
-        <p>This learning session provides the process of creating websites which is front end design. It encompasses several different aspects,
-             including webpage layout, content production, and graphic design using the different technology and CMS.</p>
-      </div>
-    </div>
-
-
-    <div className="training-card landscape-card">
-      <div className="training-info">
+      {/* Training Section */}
+      <div id="training" className="training">
+        <h2>Our Training Courses</h2>
+        <div className="training-grid landscape">
+          {trainings.map((training) => (
+            <div 
+              key={training.id}
+              className="training-card landscape-card"
+              onClick={() => setSelectedTraining(training)}
+            >
+              <div className="training-info">
                 <div className="icon-row">
-            <div className="service-icon">📐</div>
-        <h3>CAD 2D Drawings & 3D Modelling</h3>
+                  <div className="service-icon">{training.icon}</div>
+                  <h3>{training.title}</h3>
+                </div>
+                <p>{training.shortDesc}</p>
+                <button className="learn-more-btn">View Details →</button>
+              </div>
+            </div>
+          ))}
         </div>
-        <p>This learning session provides the use of computers to create two-dimensional layout design and three-dimensional modeling. It will equip educators, students, engineers 
-            and professionals on how to utilize CAD software for 2D & 3D drawing.</p>
       </div>
-    </div>
 
+      {/* Service Modal */}
+      {selectedService && (
+        <div className="modal-overlay" onClick={() => setSelectedService(null)}>
+          <div className="modal-content service-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="close-btn" onClick={() => setSelectedService(null)}>×</button>
+            
+            <div className="modal-header">
+              <img src={selectedService.image} alt={selectedService.title} className="modal-image" />
+              <h2>{selectedService.title}</h2>
+            </div>
 
-    <div className="training-card landscape-card">
-      <div className="training-info">
-        <div className="icon-row">
-            <div className="service-icon">🧑‍💻</div>
-        <h3>.Net Programming</h3>
+            <div className="modal-body">
+              <p className="modal-description">{selectedService.fullDesc}</p>
+              
+              <div className="features-section">
+                <h3>Key Features</h3>
+                <ul className="features-list">
+                  {selectedService.features.map((feature, index) => (
+                    <li key={index}> {feature}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="modal-footer">
+                <div className="service-row">
+                <p className="contact-info">
+                 
+                <img className="gmail-service" src={gmail} alt="Facebook" />
+                Contact us at: <a href="mailto:edwin.cordenete@gmail.com">edwin.cordenete@gmail.com</a>
+                </p>
+                </div>
+                <button className="primary-btn">Request Quote</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <p>This learning session provides a framework that provides a programming guidelines that can be used to develop a wide range of application from web to mobile to 
-            Windows-based applications. The .NET framework can work with several programming languages such as C#, VB.NET, C++ and F#.</p>
-      </div>
-    </div>
+      )}
 
+      {/* Training Modal */}
+      {selectedTraining && (
+        <div className="modal-overlay" onClick={() => setSelectedTraining(null)}>
+          <div className="modal-content training-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="close-btn" onClick={() => setSelectedTraining(null)}>×</button>
+            
+            <div className="modal-header training-header">
+              <div className="training-icon-large">{selectedTraining.icon}</div>
+              <h2>{selectedTraining.title}</h2>
+              <div className="training-meta">
+                <span className="badge">⏱️ {selectedTraining.duration}</span>
+                <span className="badge level">{selectedTraining.level}</span>
+              </div>
+            </div>
 
-    <div className="training-card landscape-card">
-      <div className="training-info">
-        <div className="icon-row">
-            <div className="service-icon">📊</div>
-        <h3>Financial Planning & Management</h3>
+            <div className="modal-body">
+              <p className="modal-description">{selectedTraining.fullDesc}</p>
+              
+              <div className="topics-section">
+                <h3>Course Topics</h3>
+                <ul className="topics-list">
+                  {selectedTraining.topics.map((topic, index) => (
+                    <li key={index}>
+                      <span className="topic-number">{index + 1}</span>
+                      {topic}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="modal-footer">
+
+                <button className="primary-btn">Enroll Now</button>
+                {/* <p className="contact-info">
+                  📧 For enrollment: <a href="mailto:edwin.cordenete@gmail.com">edwin.cordenete@gmail.com</a>
+                </p> */}
+                
+                              <div className="training-row">
+                  <a href="https://www.facebook.com/successandbrightlearning/#" target="_blank" rel="noopener noreferrer">
+                <div className="modal-icon">
+                <img src={facebook} alt="Facebook" />
+                </div>
+            </a>
+            
+            <a href="mailto:edwin.cordenete@gmail.com" target="_blank" rel="noopener noreferrer">
+                <div>
+                <img className="gmail-training" src={gmail} alt="Facebook" />
+                </div>
+            </a>
+
+                {/* <a href="mailto:edwin.cordenete@gmail.com" target="_blank" rel="noopener noreferrer">
+                <div >
+                <img className="gmail-icon" src={gmail} alt="Facebook" />
+                </div></a> */}
+            
+            <a href="https://www.youtube.com/@SuccessBrightLearning" target="_blank" rel="noopener noreferrer">
+                <div className="modal-icon">
+                <img src={youtube} alt="YouTube" />
+                </div>
+            </a>
+            </div>
+
+                
+{/* 
+                <div className="training-row">
+                  <a href="https://www.facebook.com/successandbrightlearning/#" target="_blank" rel="noopener noreferrer">
+                <div className="modal-icon">
+                <img src={facebook} alt="Facebook" />
+                </div>
+            </a>
+            <a href="mailto:edwin.cordenete@gmail.com" target="_blank" rel="noopener noreferrer">
+                <div className="modal-icon">
+                <img src={facebook} alt="Facebook" />
+                </div>
+            </a>
+            
+            <a href="https://www.youtube.com/@SuccessBrightLearning" target="_blank" rel="noopener noreferrer">
+                <div className="modal-icon">
+                <img src={youtube} alt="YouTube" />
+                </div>
+            </a>
+            </div> */}
+              </div>
+            </div>
+          </div>
         </div>
-        <p>This learning session is a vital activity in any organization. It is the process of planning, organizing, controlling and monitoring financial resources 
-            with a view to achieve organizational goals and objectives.</p>
-      </div>
-    </div>
-  </div>
-</div>
+      )}
 
 
      
@@ -451,7 +699,7 @@ const handleSubmit = async (e) => {
             <p>452 Cabildo St. 452 Cabildo St, Intramuros, Manila, 1014 Metro Manila, Philippines</p>
           </div>
           <div className="info-item">
-            <strong>📧 Email:</strong>
+            <strong><img src={gmail} alt="Logo" className="gmail-logo" /> Email:</strong>
             <p>edwin.cordenete@gmail.com</p>
           </div>
           <div className="info-item">
@@ -528,6 +776,12 @@ const handleSubmit = async (e) => {
             <a href="https://www.youtube.com/@SuccessBrightLearning" target="_blank" rel="noopener noreferrer">
                 <div className="footer-icon">
                 <img src={youtube} alt="YouTube" />
+                </div>
+            </a>
+
+                        <a href="mailto:edwin.cordenete@gmail.com" target="_blank" rel="noopener noreferrer">
+                <div >
+                <img className="gmail-icon" src={gmail} alt="Facebook" />
                 </div>
             </a>
             </div>
