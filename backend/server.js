@@ -61,7 +61,7 @@ app.post("/send", async (req, res) => {
     console.log(" Email sent successfully:", info.messageId);
     console.log(` Sender Name: ${name}`);
     console.log(` Sender Email: ${email}`);
-    console.log(` Receiver: edwin.cordenete@gmail.com`);
+    console.log(` Receiver: tristanaquino814gmail.com`);
     
 
     res.status(200).json({ 
@@ -84,7 +84,7 @@ app.get("/", (req, res) => {
 });
 
 
-const PORT = 4002;
+const PORT = 3002;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });

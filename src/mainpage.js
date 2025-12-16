@@ -122,7 +122,7 @@ const handleSubmit = async (e) => {
     setLoading(true);
     try {
 
-      const res = await fetch("http://localhost:4002/send", {
+      const res = await fetch("http://localhost:3002/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -690,7 +690,7 @@ const handleSubmit = async (e) => {
 
 {/* CONTACT US */}
 <div id="contact" className="contact">
-      <h2>Contact Us</h2>
+      <h2>Contact Us:</h2>
       <div className="contact-content">
         <div className="contact-info">
           {/* Contact Information */}
