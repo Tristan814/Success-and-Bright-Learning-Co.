@@ -20,6 +20,12 @@ import testi2 from "./assets/testi2.jpg";
 import testi3 from "./assets/testi3.jpg";
 import gmail from "./assets/gmail.png";
 import { useState, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation } from "swiper/modules";
+
+
 
 
 function Header() {
@@ -579,7 +585,7 @@ const handleSubmit = async (e) => {
 
      
 
-{/* EVENTS SECTION */}
+{/* EVENTS SECTION
 <div id="events" className="events">
   <h2>Past and Upcoming Events</h2>
 
@@ -671,22 +677,151 @@ const handleSubmit = async (e) => {
 
     </div>
   </div>
+</div> */}
+{/* EVENTS SECTION */}
+<div id="events" className="events">
+  <h2 >Past & Upcoming Events</h2>
+
+  <div className="events-container">
+
+    {/* LEFT — IMAGE SLIDER */}
+    <div className="events-left">
+      <Swiper
+        modules={[Navigation]}
+        navigation
+        slidesPerView={1}
+        className="events-swiper"
+      >
+        {eventSlides.map((ev, index) => (
+          <SwiperSlide key={index}>
+            <img
+              src={ev.image}
+              alt={ev.title || `Event ${index + 1}`}
+              className="event-slide-image"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+
+    {/* RIGHT — EVENTS LIST */}
+   <div className="events-right">
+
+  <div className="events-card">
+    <span className="events-badge">
+      {isPastMode ? "Past Events" : "Upcoming Events"}
+    </span>
+
+    <h3 className="event-main-title">
+      {isPastMode
+        ? pastEvents[currentPast].title
+        : upcomingEvents[currentUpcoming].title}
+    </h3>
+
+    <p className="event-main-desc">
+      {isPastMode
+        ? pastEvents[currentPast].text
+        : upcomingEvents[currentUpcoming].text}
+    </p>
+
+    <div className="events-list">
+      {(isPastMode ? pastEvents : upcomingEvents).map((ev, idx) => {
+        const isActive = isPastMode
+          ? idx === currentPast
+          : idx === currentUpcoming;
+
+        return (
+          <button
+            key={idx}
+            className={`event-item ${isActive ? "active" : ""}`}
+            onClick={() =>
+              isPastMode
+                ? setCurrentPast(idx)
+                : setCurrentUpcoming(idx)
+            }
+          >
+            {ev.title}
+          </button>
+        );
+      })}
+    </div>
+
+    <button
+      className="switch-mode-btn"
+      onClick={() => setIsPastMode(!isPastMode)}
+    >
+      {isPastMode ? "View Upcoming Events →" : "← View Past Events"}
+    </button>
+  </div>
+
+</div>
+
+</div>
 </div>
 
 {/* TESTIMONIALS */}
-<div id="testimonials" className="testimonials">
-        <h2>Testimonials</h2>
-        <div className="testimonials-content">
-        <div className="image1">
-             <img src={testi1} alt="Image" className="testiimage" />
-          </div>
-        <div className="image2">
-            <img src={testi2} alt="Image" className="testiimage" />
-          </div>
-            
-        </div>
-        <img src={testi3} alt="Image" className="testiimage2" />
+<section id="testimonials" className="testimonials">
+  <h2 className="testimonials-title">Testimonials</h2>
+  <p className="testimonials-subtitle">
+    What our learners say about Success & Bright Learning
+  </p>
+
+  <div className="testimonials-grid">
+
+    {/* Card 1 */}
+    <div className="testimonial-card">
+      <div className="avatar">
+        <img src={testi1} alt="Client 1" />
       </div>
+
+      <div className="testimonial-box">
+        <p className="testimonial-text">
+          “This program helped me gain confidence and practical skills.
+          The training was well structured and engaging.”
+        </p>
+
+        <h4 className="testimonial-name">Avinash Kr</h4>
+        <span className="testimonial-role">Co-Founder at XYZ</span>
+      </div>
+    </div>
+
+    {/* Card 2 */}
+    <div className="testimonial-card ">
+      <div className="avatar">
+        <img src={testi2} alt="Client 2" />
+      </div>
+
+      <div className="testimonial-box">
+        <p className="testimonial-text">
+          “Excellent mentors and clear explanations.
+          I highly recommend Success & Bright Learning.”
+        </p>
+
+        <h4 className="testimonial-name">Bharat Kunal</h4>
+        <span className="testimonial-role">Manager at XYZ</span>
+      </div>
+    </div>
+
+    {/* Card 3 */}
+    <div className="testimonial-card">
+      <div className="avatar">
+        <img src={testi3} alt="Client 3" />
+      </div>
+
+      <div className="testimonial-box">
+        <p className="testimonial-text">
+          “The sessions were practical and easy to follow.
+          Perfect for beginners and professionals.”
+        </p>
+
+        <h4 className="testimonial-name">Prabhakar D</h4>
+        <span className="testimonial-role">Founder & CEO at XYZ</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
 {/* CONTACT US */}
 <div id="contact" className="contact">
