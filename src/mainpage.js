@@ -15,15 +15,27 @@ import youtube from "./assets/youtube-icon.png";
 import facebook from "./assets/facebook-icon.png";
 import event1 from "./assets/event1.jpg";
 import event2 from "./assets/event2.jpg";
-import testi1 from "./assets/testi1.jpg";
-import testi2 from "./assets/testi2.jpg";
-import testi3 from "./assets/testi3.jpg";
+import event3 from "./assets/event3.jpg";
+import event4 from "./assets/event4.png";
+import event5 from "./assets/event5.jpg";
+import event6 from "./assets/event6.jpg";
+import event7 from "./assets/event7.jpeg";
+import event8 from "./assets/event8.jpg";
+import event9 from "./assets/event9.PNG";
+import event10 from "./assets/event10.PNG";
+import event11 from "./assets/event11.PNG";
+import event12 from "./assets/event12.PNG";
+import event13 from "./assets/event13.PNG";
+import event14 from "./assets/event14.PNG";
+import event15 from "./assets/event15.PNG";
+import event16 from "./assets/event16.PNG";
 import gmail from "./assets/gmail.png";
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
+import Testimonials from "./assets/TESTIMONIALS_1.png";
 
 
 
@@ -72,7 +84,20 @@ function Header() {
 const eventSlides = [
   { id: 1, image: event1 },
   { id: 2, image: event2 },
-
+  { id: 3, image: event3 },
+  { id: 4, image: event4 },
+  { id: 5, image: event5 },
+  { id: 6, image: event6 },
+  { id: 7, image: event7 },
+  { id: 8, image: event8 },
+  { id: 9, image: event9 },
+  { id: 10, image: event10 },
+  { id: 11, image: event11 },
+  { id: 12, image: event12 }, 
+  { id: 13, image: event13 },
+  { id: 14, image: event14 },
+  { id: 15, image: event15 },
+  { id: 16, image: event16 },
 ];
 
 
@@ -83,9 +108,23 @@ const [isPastMode, setIsPastMode] = useState(true);
 
 const [currentPast, setCurrentPast] = useState(0);
 const pastEvents = [
-  { title: "JavaScript Bootcamp 2024", text: "A hands-on workshop teaching JavaScript fundamentals." },
-  { title: "Robotics Training Day", text: "Students learned basic robotics and automation." },
-  { title: "Math Competition 2023", text: "A school-wide math competition with exciting prizes." }
+  { title: "CAD 2D Training Workshop", text: "(For Beginners, Intermediate and Advanced Levels)" },
+  { title: "CAD 3D Modelling Training Workshop", text: "(For Beginners, Intermediate and Advanced Levels)" },
+  { title: "Computer Basics 101", text: "(An essential training-workship for all levels)" },
+    { title: "Financial Planning Webinar", text: "(An essential Financial Management Literacy during Uncertain Times)" },
+  { title: "Java 8 to Java 14", text: "(Selected Language Features and the Technology Path for Anspiring Java Developer)" },
+    { title: "Web Design & Development", text: "(An essential training-workshop for all levels)" },
+  { title: "CAD 2D & 3D Drawing Overview", text: "(For Beginners, Intermediate and Advanced Levels)" },
+    { title: "Living Healthy & Happy", text: "(An Essential Nutritional Immunology Webinar During Uncertain Times)" },
+  { title: "Introduction to Python and Setup 1", text: "(Reskill ONLIVE Learning Courses)" },
+
+    { title: "Exploring SQL and the Setup Essentials", text: "(Reskill ONLIVE Learning Courses)" },
+    { title: "Panimula sa Pag-Manage ng IT Projects", text: "(Reskill ONLIVE Learning Courses) - Tagalog Course" },
+  { title: "Introduction to AutoCAD 2D", text: "(Reskill ONLIVE Learning Courses)" },
+    { title: "Exploring C#. Net Programming with MySQL Integration", text: "(Reskill ONLIVE Learning Courses)" },
+  { title: "Introduction to AutoCAD 3D Modeling", text: "(Reskill ONLIVE Learning Courses)" },
+  { title: "Mastering the Fundamentals of Java Programming", text: "(Reskill ONLIVE Learning Courses)" },
+        { title: "Financial Planning & Canva (Basic Design)", text: "(Free Financial Planning of Sunlife)" }
 ];
 
 
@@ -582,102 +621,6 @@ const handleSubmit = async (e) => {
         </div>
       )}
 
-
-     
-
-{/* EVENTS SECTION
-<div id="events" className="events">
-  <h2>Past and Upcoming Events</h2>
-
-  <div className="events-content">
-
-    <div className="left-events">
-      <div className="image-wrapper">
-
-        <button
-          className="slider-icon-arrow arrow-left"
-          onClick={prevEvent}
-        >
-          ‹
-        </button>
-
-        <img
-          src={eventSlides[currentEvent].image}
-          alt={`Event ${currentEvent + 1}`}
-          className="event-image"
-        />
-
-        <button
-          className="slider-icon-arrow arrow-right"
-          onClick={nextEvent}
-        >
-          ›
-        </button>
-
-      </div>
-    </div>
-
-   
-    <div className="right-box">
-
-      <h3 className="right-title">
-        {isPastMode ? "Past Events" : "Upcoming Events"}
-      </h3>
-
-      <div className="event-textbox">
-
-        <h4 className="event-title">
-          {isPastMode 
-            ? pastEvents[currentPast].title
-            : upcomingEvents[currentUpcoming].title}
-        </h4>
-
-        <p className="event-desc">
-          {isPastMode 
-            ? pastEvents[currentPast].text
-            : upcomingEvents[currentUpcoming].text}
-        </p>
-
-        
-      </div>
-
-
-      <div className="events-list-wrapper">
-
-        <div className="events-list-mini">
-          {(isPastMode ? pastEvents : upcomingEvents).map((ev, idx) => (
-            <button
-              key={idx}
-              className={
-                "events-list-item " +
-                (
-                  isPastMode 
-                    ? (idx === currentPast ? "selected" : "") 
-                    : (idx === currentUpcoming ? "selected" : "")
-                )
-              }
-              onClick={() => {
-                if (isPastMode) setCurrentPast(idx);
-                else setCurrentUpcoming(idx);
-              }}
-            >
-              <div className="mini-title">{ev.title}</div>
-            </button>
-          ))}
-        </div>
-
-        <button 
-          className="switch-mode-btn"
-          onClick={() => setIsPastMode(!isPastMode)}
-        >
-          {isPastMode ? "View Upcoming Events →" : "← View Past Events"}
-        </button>
-
-      </div>
-
-    </div>
-  </div>
-</div> */}
 {/* EVENTS SECTION */}
 <div id="events" className="events">
   <h2 >Past & Upcoming Events</h2>
@@ -689,16 +632,20 @@ const handleSubmit = async (e) => {
       <Swiper
         modules={[Navigation]}
         navigation
-        slidesPerView={1}
+        slidesPerView={1.2}        // 👈 shows next/prev peeks
+        centeredSlides={true}     // 👈 keeps active centered
+        spaceBetween={20}
         className="events-swiper"
       >
         {eventSlides.map((ev, index) => (
           <SwiperSlide key={index}>
-            <img
-              src={ev.image}
-              alt={ev.title || `Event ${index + 1}`}
-              className="event-slide-image"
-            />
+            <div className="slide-inner">
+              <img
+                src={ev.image}
+                alt={ev.title || `Event ${index + 1}`}
+                className="event-slide-image"
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -768,54 +715,26 @@ const handleSubmit = async (e) => {
 
   <div className="testimonials-grid">
 
-    {/* Card 1 */}
-    <div className="testimonial-card">
-      <div className="avatar">
-        <img src={testi1} alt="Client 1" />
-      </div>
 
-      <div className="testimonial-box">
-        <p className="testimonial-text">
-          “This program helped me gain confidence and practical skills.
-          The training was well structured and engaging.”
-        </p>
-
-        <h4 className="testimonial-name">Avinash Kr</h4>
-        <span className="testimonial-role">Co-Founder at XYZ</span>
-      </div>
-    </div>
-
-    {/* Card 2 */}
-    <div className="testimonial-card ">
-      <div className="avatar">
-        <img src={testi2} alt="Client 2" />
-      </div>
-
-      <div className="testimonial-box">
-        <p className="testimonial-text">
-          “Excellent mentors and clear explanations.
-          I highly recommend Success & Bright Learning.”
-        </p>
-
-        <h4 className="testimonial-name">Bharat Kunal</h4>
-        <span className="testimonial-role">Manager at XYZ</span>
-      </div>
-    </div>
 
     {/* Card 3 */}
     <div className="testimonial-card">
       <div className="avatar">
-        <img src={testi3} alt="Client 3" />
+       <img src={Testimonials} alt="Client" />
       </div>
 
       <div className="testimonial-box">
         <p className="testimonial-text">
-          “The sessions were practical and easy to follow.
-          Perfect for beginners and professionals.”
+            Natutunan ko po yung mga iba't ibang code
+            about sa Microsoft Excel. Mahusay po halata po sa professional sya sa
+            pagtuturo about computer. Yes po, mairerecommend ko po talaga ang
+            course na yun sa mga friends ko dahil sa panahon
+            nga po ngayon halos puro online na ang
+            ginagamit sa ano mang bagay.
         </p>
 
-        <h4 className="testimonial-name">Prabhakar D</h4>
-        <span className="testimonial-role">Founder & CEO at XYZ</span>
+        <h4 className="testimonial-name">Erickjohn Bautista de Arce</h4>
+        <span className="testimonial-role">Grade 12 Student</span>
       </div>
     </div>
 
