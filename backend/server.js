@@ -1,90 +1,71 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
-// 👈 Import the email template function
-const { generateEmailContent } = require('../src/emailtemplate'); 
+const { generateEmailContent } = require("./emailtemplate");
 
 const app = express();
-// Middleware setup
-app.use(cors()); 
-app.use(express.json()); 
 
-// ============================================
-// POST route for sending email
-// ============================================
+app.use(cors());
+app.use(express.json());
+
 app.post("/send", async (req, res) => {
-  const { name, email, message } = req.body;
+  const {
+    companyName,
+    organizationDetails,
+    name,
+    designation,
+    mobileNumber,
+    email,
+    serviceType,
+    message,
+  } = req.body;
 
-  // 1. Server-side Validation
-  if (!name || !email || !message) {
-    return res.status(400).json({ 
-      success: false, 
-      error: "All fields are required" 
+  if (
+    !companyName ||
+    !organizationDetails ||
+    !name ||
+    !designation ||
+    !mobileNumber ||
+    !email ||
+    !serviceType
+  ) {
+    return res.status(400).json({
+      success: false,
+      error: "Missing required fields",
     });
   }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return res.status(400).json({ 
-      success: false, 
-      error: "Invalid email address" 
-    });
-  }
-
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "tristanaquino814@gmail.com", 
-      pass: "jojlcxfdpjozzvcx",            
+      user: "tristanaquino814@gmail.com",
+      pass: "jojlcxfdpjozzvcx", // Gmail App Password
     },
   });
 
-
-  const { html, text } = generateEmailContent({ name, email, message });
-
+  const { html, text } = generateEmailContent(req.body);
 
   const mailOptions = {
-    from: '"Success and Bright Learning Co." <tristanaquino814@gmail.com>',
-    to: "edwin.cordenete@gmail.com",     
-    replyTo: `"${name}" <${email}>`,
-    subject: `New Contact Form Message from ${name}`,
-    
-
-    html: html,
-    text: text,
+    from: `"Success & Bright Learning" <tristanaquino814@gmail.com>`,
+    to: "tristanaquino814@gmail.com",
+    replyTo: email,
+    subject: `New Quotation Request – ${companyName}`,
+    html,
+    text,
   };
 
-
   try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log(" Email sent successfully:", info.messageId);
-    console.log(` Sender Name: ${name}`);
-    console.log(` Sender Email: ${email}`);
-    console.log(` Receiver: tristanaquino814gmail.com`);
-    
-
-    res.status(200).json({ 
-      success: true, 
-      message: "Message sent successfully!" 
-    });
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ success: true });
   } catch (err) {
-    console.error("❌ Email error:", err);
-
-    res.status(500).json({ 
-      success: false, 
-      error: "Failed to send email. Check server logs." 
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      error: "Email failed to send",
     });
   }
 });
 
-
-app.get("/", (req, res) => {
-  res.send("Server is running! ✅");
-});
-
-
-const PORT = 3002;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+app.listen(3005, () => {
+  console.log("🚀 Server running on http://localhost:3005");
 });

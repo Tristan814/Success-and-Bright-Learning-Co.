@@ -36,50 +36,66 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import Testimonials from "./assets/TESTIMONIALS_1.png";
+import { Link, useNavigate } from 'react-router-dom';
 
+import Header from "./header";
+import Footer from "./footer";
 
+// function Header() {
+//   const [hidden, setHidden] = useState(false);
 
+//   useEffect(() => {
+//     let last = 0;
 
-function Header() {
-  const [hidden, setHidden] = useState(false);
-  const [lastScroll, setLastScroll] = useState(0);
+//     function handleScroll() {
+//       const current = window.pageYOffset;
+//       setHidden(current > last && current > 80);
+//       last = current;
+//     }
 
-  useEffect(() => {
-    function handleScroll() {
-      const currentScroll = window.pageYOffset;
+//     window.addEventListener("scroll", handleScroll);
+//     return () => window.removeEventListener("scroll", handleScroll);
+//   }, []);
 
-      if (currentScroll > lastScroll && currentScroll > 80) {
-        setHidden(true);   // hide header
-      } else {
-        setHidden(false);  // show header
-      }
+//   return (
+//     <header className={`header ${hidden ? "hidden" : ""}`}>
 
-      setLastScroll(currentScroll);
-    }
+//       <Link to="/" className="logo-container">
+//         <img src={logo} alt="Success & Bright Learning Logo" className="logo-image" />
+//         <div className="logo-text">Success & Bright Learning</div>
+//       </Link>
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScroll]);
+// <nav className="nav">
+//   <a href="#about">About Us</a>
+//   <a href="#services">Services</a>
+//   <a href="#training">Training Course</a>
+//   <a href="#events">Events</a>
+//   <a href="#testimonials">Testimonials</a>
+//   <Link to="/contact">Contact Us</Link>
+// </nav>
 
-  return (
-    <header className={`header ${hidden ? "hidden" : ""}`}>
-      <div className="logo-container">
-        <img src={logo} alt="Logo" className="logo-image" />
-        <div className="logo-text">Success & Bright Learning</div>
-      </div>
+//     </header>
+//   );
+// }
+//   return (
+//     <header className={`header ${hidden ? "hidden" : ""}`}>
+//       <div className="logo-container">
+//         <img src={logo} alt="Logo" className="logo-image" />
+//         <div className="logo-text">Success & Bright Learning</div>
+//       </div>
 
-      <nav className="nav">
-        <a href="#frontp">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#services">Services</a>
-        <a href="#training">Training Course</a>
-        <a href="#events">Events</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#contact">Contact Us</a>
-      </nav>
-    </header>
-  );
-}
+//       <nav className="nav">
+//         <a href="#frontp">Home</a>
+//         <a href="#about">About Us</a>
+//         <a href="#services">Services</a>
+//         <a href="#training">Training Course</a>
+//         <a href="#events">Events</a>
+//         <a href="#testimonials">Testimonials</a>
+//         <a href="#contact">Contact Us</a>
+//       </nav>
+//     </header>
+//   );
+// }
 
 const eventSlides = [
   { id: 1, image: event1 },
@@ -147,53 +163,6 @@ const upcomingEvents = [
 
   }, []); 
 
-const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(null); // { ok: boolean, text: string }
-
-const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    setStatus(null); 
-
-
-    if (!name.trim() || !email.trim() || !message.trim()) {
-      setStatus({ ok: false, text: "Please fill in all fields." });
-      return;
-    }
-
-    setLoading(true);
-    try {
-
-      const res = await fetch("http://localhost:3002/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, message }),
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        setStatus({ ok: true, text: "Message sent successfully!" });
- 
-        setName("");
-        setEmail("");
-        setMessage("");
-      } else {
-
-        setStatus({ ok: false, text: data.error || "Something went wrong." });
-      }
-    } catch (err) {
-
-      setStatus({ ok: false, text: "Network error. Please try again." });
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const [selectedService, setSelectedService] = useState(null);
   const [selectedTraining, setSelectedTraining] = useState(null);
@@ -418,18 +387,42 @@ const handleSubmit = async (e) => {
 
         <Header />
 
-      {/* <div   style={{ backgroundImage: `url(${logo})` }} className="frontp">
-        <h1>Welcome to Success & Bright Learning</h1>
-        <p>Tools To Help You Succeed</p>
-        <p>Offering In-Depth Training For Your Team</p>
 
-      </div> */}
-      <div className="frontp">
-  <div className="logo-bg"></div>
-  <h1>Welcome to Success & Bright Learning</h1>
-  <p>Tools To Help You Succeed</p>
-  <p>Offering In-Depth Training For Your Team</p>
-</div>
+<section className="hero">
+  <div className="hero-content">
+    <span className="hero-badge">Trusted Learning & IT Partner</span>
+
+    <h1>
+      Welcome to <span>Success & Bright Learning</span>!
+    </h1>
+
+    <p>
+      Success & Bright Learning Co. delivers corporate training,
+      IT consulting, and professional development programs
+      designed to build real-world skills and long-term success.
+    </p>
+
+    <div className="hero-buttons">
+      <Link
+        to="/contact"
+        state={{ serviceType: "consulting" }}
+        className="btn-primary"
+      >
+        Request a Proposal
+      </Link>
+
+      <a href="#services" className="btn-outline">
+        View Services
+      </a>
+    </div>
+  </div>
+
+  <div className="hero-image">
+    <img src={internship} alt="Corporate Learning" />
+  </div>
+</section>
+
+
                     
       <div id="about" className="about">
         <h2>About Us</h2>
@@ -438,12 +431,14 @@ const handleSubmit = async (e) => {
             <div><img src={aboutIMG} alt="Image" className="aboutIMG" /></div>
           <div className="about-text">
             <p>
-              Success & Bright Learning Co. was founded in May 2020 with the vision of educating everyone to learn the beauty of life in 
-              all aspects of knowledge - i.e. spiritual, health & wellness, financial and technology perspective.
+             The SUCCESS & BRIGHT LEARNING CO., is an IT consulting firm in the Philippines that specializes in IT Solutions and Services. 
+             with principal office address at 452 Cabildo St. Intramuros, Manila, represented herein by Edwin S. Cordenete hereinafter referred to as "Single Proprietorship Company".
             </p>
             <p>
-              The learnings from various webinars conducted will provide wholistic approach on becoming a well-rounded 
-              individuals who can live joyfully and successfully everyday.
+             Success & Bright Learning Co. was founded in May 2020 with the vision of educating everyone to learn the beauty of life in all aspects of knowledge—i.e., spiritual, health & wellness, financial, and technological perspectives.
+
+The learnings from various webinars conducted will provide a holistic approach to becoming well-rounded individuals who can live joyfully and successfully every day.
+
             </p>
           </div>
 
@@ -451,7 +446,6 @@ const handleSubmit = async (e) => {
         </div>
       </div>
 
-    <img src={internship} alt="internship" className="internship-image" />
 
       {/* Services Section */}
       <div id="services" className="services">
@@ -466,7 +460,8 @@ const handleSubmit = async (e) => {
               <img src={service.image} alt={service.title} className="image-service" />
               <h3>{service.title}</h3>
               <p>{service.shortDesc}</p>
-              <button className="learn-more-btn">Learn More →</button>
+              <button className="learn-more-btn"
+                >Learn More →</button>
             </div>
           ))}
         </div>
@@ -562,59 +557,15 @@ const handleSubmit = async (e) => {
                   ))}
                 </ul>
               </div>
-
               <div className="modal-footer">
-
-                <button className="primary-btn">Enroll Now</button>
-                {/* <p className="contact-info">
-                  📧 For enrollment: <a href="mailto:edwin.cordenete@gmail.com">edwin.cordenete@gmail.com</a>
-                </p> */}
-                
-                              <div className="training-row">
-                  <a href="https://www.facebook.com/successandbrightlearning/#" target="_blank" rel="noopener noreferrer">
-                <div className="modal-icon">
-                <img src={facebook} alt="Facebook" />
+                <div className="service-row">
+                <p className="contact-info">
+                 
+                <img className="gmail-service" src={gmail} alt="Facebook" />
+                Contact us at: <a href="mailto:edwin.cordenete@gmail.com">edwin.cordenete@gmail.com</a>
+                </p>
                 </div>
-            </a>
-            
-            <a href="mailto:edwin.cordenete@gmail.com" target="_blank" rel="noopener noreferrer">
-                <div>
-                <img className="gmail-training" src={gmail} alt="Facebook" />
-                </div>
-            </a>
-
-                {/* <a href="mailto:edwin.cordenete@gmail.com" target="_blank" rel="noopener noreferrer">
-                <div >
-                <img className="gmail-icon" src={gmail} alt="Facebook" />
-                </div></a> */}
-            
-            <a href="https://www.youtube.com/@SuccessBrightLearning" target="_blank" rel="noopener noreferrer">
-                <div className="modal-icon">
-                <img src={youtube} alt="YouTube" />
-                </div>
-            </a>
-            </div>
-
-                
-{/* 
-                <div className="training-row">
-                  <a href="https://www.facebook.com/successandbrightlearning/#" target="_blank" rel="noopener noreferrer">
-                <div className="modal-icon">
-                <img src={facebook} alt="Facebook" />
-                </div>
-            </a>
-            <a href="mailto:edwin.cordenete@gmail.com" target="_blank" rel="noopener noreferrer">
-                <div className="modal-icon">
-                <img src={facebook} alt="Facebook" />
-                </div>
-            </a>
-            
-            <a href="https://www.youtube.com/@SuccessBrightLearning" target="_blank" rel="noopener noreferrer">
-                <div className="modal-icon">
-                <img src={youtube} alt="YouTube" />
-                </div>
-            </a>
-            </div> */}
+                <button className="primary-btn">Request Quote</button>
               </div>
             </div>
           </div>
@@ -743,11 +694,11 @@ const handleSubmit = async (e) => {
 
 
 {/* CONTACT US */}
-<div id="contact" className="contact">
+{/* <div id="contact" className="contact">
       <h2>Contact Us:</h2>
       <div className="contact-content">
         <div className="contact-info">
-          {/* Contact Information */}
+        
           <div className="info-item">
             <strong>📍 Address:</strong>
             <p>452 Cabildo St. 452 Cabildo St, Intramuros, Manila, 1014 Metro Manila, Philippines</p>
@@ -762,7 +713,7 @@ const handleSubmit = async (e) => {
           </div>
         </div>
         
-        {/* Contact Form */}
+  
         <form onSubmit={handleSubmit} className="contact-form" noValidate>
           <input
             type="text"
@@ -792,7 +743,7 @@ const handleSubmit = async (e) => {
             {loading ? 'Sending...' : 'Send Message'}
           </button>
 
-          {/* Status Message */}
+        
           {status && (
             <p
               role="status"
@@ -807,42 +758,11 @@ const handleSubmit = async (e) => {
           )}
         </form>
       </div>
-    </div>
+    </div> */}
     
 {/* FOOTER */}
-      <footer className="footer">   
-        <div className="footer-text">
-        <div className="set-to-row">
-        <h1>Success & Bright Learning Co.</h1>
-        <img src={logo} alt="Logo" className="logo-footer" />
-            </div>
-            <div className="set-to-margin-top">
-            <p className="set-to-margin-bottom">We offer trainings, webinars and tutorials. We understand your needs and we will 
-            cater the kind of learnings that will satisfy your needs. Do not hesitate to contact us.</p>
-            <p>&copy; 2020 Success & Bright Learning Co. All rights reserved. | Registration No.: 2007091</p>
-            <div className="set-to-row2">
-            <a href="https://www.facebook.com/successandbrightlearning/#" target="_blank" rel="noopener noreferrer">
-                <div className="footer-icon">
-                <img src={facebook} alt="Facebook" />
-                </div>
-            </a>
-            
-            <a href="https://www.youtube.com/@SuccessBrightLearning" target="_blank" rel="noopener noreferrer">
-                <div className="footer-icon">
-                <img src={youtube} alt="YouTube" />
-                </div>
-            </a>
-
-                        <a href="mailto:edwin.cordenete@gmail.com" target="_blank" rel="noopener noreferrer">
-                <div >
-                <img className="gmail-icon" src={gmail} alt="Facebook" />
-                </div>
-            </a>
-            </div>
-            </div>
-        
-        </div>
-      </footer>
+      
+      <Footer />
     </div>
   );
 };

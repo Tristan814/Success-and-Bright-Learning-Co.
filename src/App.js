@@ -1,14 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
 
-import MainPage from './mainpage';
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainPage from './mainpage';
+import Contact from './contact';
+import ScrollToTop from "./scrollToTop";
 
 function App() {
   return (
-    <div className="App">
-      <MainPage/>
-    </div>
+    <Router basename="/Success-and-Bright-Learning-Co.">
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>
   );
 }
 
