@@ -37,6 +37,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import Testimonials from "./assets/TESTIMONIALS_1.png";
 import { Link, useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion";
 
 import Header from "./header";
 import Footer from "./footer";
@@ -98,7 +99,6 @@ import Footer from "./footer";
 // }
 
 const eventSlides = [
-  { id: 1, image: event1 },
   { id: 2, image: event2 },
   { id: 3, image: event3 },
   { id: 4, image: event4 },
@@ -120,6 +120,7 @@ const eventSlides = [
 const MainPage = () => {
 
 const [isPastMode, setIsPastMode] = useState(true);
+
 
 
 const [currentPast, setCurrentPast] = useState(0);
@@ -146,10 +147,12 @@ const pastEvents = [
 
 const [currentUpcoming, setCurrentUpcoming] = useState(0);
 const upcomingEvents = [
-  { title: "Science Fair 2026", text: "Present your innovative science experiments and win awards." },
-  { title: "Web Design Workshop", text: "Learn how to design modern responsive websites." },
-  { title: "STEM Robotics Expo", text: "A full-day expo showcasing the latest in robotics." }
+  // { title: "Science Fair 2026", text: "Present your innovative science experiments and win awards." },
+  // { title: "Web Design Workshop", text: "Learn how to design modern responsive websites." },
+  // { title: "STEM Robotics Expo", text: "A full-day expo showcasing the latest in robotics." }
 ];
+const hasUpcomingEvents = upcomingEvents.length > 0;
+const hasPastEvents = pastEvents.length > 0;
 
 
   const [currentEvent, setCurrentEvent] = useState(0);
@@ -389,7 +392,12 @@ const upcomingEvents = [
 
 
 <section className="hero">
-  <div className="hero-content">
+    <motion.div
+    className="hero-content"
+    initial={{ opacity: 0, y: 40 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+  >
     <span className="hero-badge">Trusted Learning & IT Partner</span>
 
     <h1>
@@ -415,11 +423,17 @@ const upcomingEvents = [
         View Services
       </a>
     </div>
-  </div>
+   </motion.div>
 
-  <div className="hero-image">
+
+  <motion.div
+    className="hero-image"
+    initial={{ opacity: 0, scale: 0.95 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.8, delay: 0.2 }}
+  >
     <img src={internship} alt="Corporate Learning" />
-  </div>
+  </motion.div>
 </section>
 
 
@@ -452,17 +466,21 @@ The learnings from various webinars conducted will provide a holistic approach t
         <h2>Our Services</h2>
         <div className="services-grid">
           {services.map((service) => (
-            <div 
-              key={service.id}
+            <motion.div
               className="service-card"
-              onClick={() => setSelectedService(service)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
             >
               <img src={service.image} alt={service.title} className="image-service" />
               <h3>{service.title}</h3>
               <p>{service.shortDesc}</p>
               <button className="learn-more-btn"
                 >Learn More →</button>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -492,8 +510,20 @@ The learnings from various webinars conducted will provide a holistic approach t
 
       {/* Service Modal */}
       {selectedService && (
-        <div className="modal-overlay" onClick={() => setSelectedService(null)}>
-          <div className="modal-content service-modal" onClick={(e) => e.stopPropagation()}>
+        <motion.div
+          className="modal-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setSelectedService(null)}
+        >
+          <motion.div
+            className="modal-content service-modal"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            onClick={(e) => e.stopPropagation()}
+          >
             <button className="close-btn" onClick={() => setSelectedService(null)}>×</button>
             
             <div className="modal-header">
@@ -521,11 +551,18 @@ The learnings from various webinars conducted will provide a holistic approach t
                 Contact us at: <a href="mailto:edwin.cordenete@gmail.com">edwin.cordenete@gmail.com</a>
                 </p>
                 </div>
-                <button className="primary-btn">Request Quote</button>
+                {/* <button className="primary-btn">Request Quote</button> */}
+                <Link 
+                    to="/contact" 
+                    state={{ selectedValue: selectedService.title }} // Passing the title here
+                    className="primary-btn"
+                  >
+                    Request Quote
+                  </Link>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
 
       {/* Training Modal */}
@@ -565,7 +602,14 @@ The learnings from various webinars conducted will provide a holistic approach t
                 Contact us at: <a href="mailto:edwin.cordenete@gmail.com">edwin.cordenete@gmail.com</a>
                 </p>
                 </div>
-                <button className="primary-btn">Request Quote</button>
+                {/* <button className="primary-btn">Request Quote</button> */}
+                <Link 
+                    to="/contact" 
+                    state={{ selectedValue: selectedTraining.title }} // Passing the title here
+                    className="primary-btn"
+                  >
+                    Request Quote
+                  </Link>
               </div>
             </div>
           </div>
@@ -605,23 +649,54 @@ The learnings from various webinars conducted will provide a holistic approach t
     {/* RIGHT — EVENTS LIST */}
    <div className="events-right">
 
-  <div className="events-card">
-    <span className="events-badge">
-      {isPastMode ? "Past Events" : "Upcoming Events"}
-    </span>
+<motion.div
+  className="events-card"
+  initial={{ opacity: 0, x: 50 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6 }}
+>
+  <span className="events-badge">
+    {isPastMode ? "Past Events" : "Upcoming Events"}
+  </span>
 
-    <h3 className="event-main-title">
-      {isPastMode
-        ? pastEvents[currentPast].title
-        : upcomingEvents[currentUpcoming].title}
-    </h3>
+  {/* MAIN CONTENT */}
+  {isPastMode ? (
+    hasPastEvents ? (
+      <>
+        <h3 className="event-main-title">
+          {pastEvents[currentPast].title}
+        </h3>
 
-    <p className="event-main-desc">
-      {isPastMode
-        ? pastEvents[currentPast].text
-        : upcomingEvents[currentUpcoming].text}
-    </p>
+        <p className="event-main-desc">
+          {pastEvents[currentPast].text}
+        </p>
+      </>
+    ) : (
+      <p className="event-empty">
+        No past events yet.
+      </p>
+    )
+  ) : (
+    hasUpcomingEvents ? (
+      <>
+        <h3 className="event-main-title">
+          {upcomingEvents[currentUpcoming].title}
+        </h3>
 
+        <p className="event-main-desc">
+          {upcomingEvents[currentUpcoming].text}
+        </p>
+      </>
+    ) : (
+      <p className="event-empty">
+        No upcoming events yet. Stay tuned! 🚀
+      </p>
+    )
+  )}
+
+  {/* EVENT LIST */}
+  {(isPastMode ? hasPastEvents : hasUpcomingEvents) && (
     <div className="events-list">
       {(isPastMode ? pastEvents : upcomingEvents).map((ev, idx) => {
         const isActive = isPastMode
@@ -630,7 +705,7 @@ The learnings from various webinars conducted will provide a holistic approach t
 
         return (
           <button
-            key={idx}
+            key={ev.id}
             className={`event-item ${isActive ? "active" : ""}`}
             onClick={() =>
               isPastMode
@@ -643,14 +718,17 @@ The learnings from various webinars conducted will provide a holistic approach t
         );
       })}
     </div>
+  )}
 
-    <button
-      className="switch-mode-btn"
-      onClick={() => setIsPastMode(!isPastMode)}
-    >
-      {isPastMode ? "View Upcoming Events →" : "← View Past Events"}
-    </button>
-  </div>
+  {/* SWITCH BUTTON */}
+  <button
+    className="switch-mode-btn"
+    onClick={() => setIsPastMode(!isPastMode)}
+  >
+    {isPastMode ? "View Upcoming Events →" : "← View Past Events"}
+  </button>
+</motion.div>
+
 
 </div>
 
@@ -669,7 +747,13 @@ The learnings from various webinars conducted will provide a holistic approach t
 
 
     {/* Card 3 */}
-    <div className="testimonial-card">
+    <motion.div
+        className="testimonial-card"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        viewport={{ once: true }}
+      >
       <div className="avatar">
        <img src={Testimonials} alt="Client" />
       </div>
@@ -687,81 +771,13 @@ The learnings from various webinars conducted will provide a holistic approach t
         <h4 className="testimonial-name">Erickjohn Bautista de Arce</h4>
         <span className="testimonial-role">Grade 12 Student</span>
       </div>
-    </div>
+    </motion.div>
 
   </div>
 </section>
 
 
-{/* CONTACT US */}
-{/* <div id="contact" className="contact">
-      <h2>Contact Us:</h2>
-      <div className="contact-content">
-        <div className="contact-info">
-        
-          <div className="info-item">
-            <strong>📍 Address:</strong>
-            <p>452 Cabildo St. 452 Cabildo St, Intramuros, Manila, 1014 Metro Manila, Philippines</p>
-          </div>
-          <div className="info-item">
-            <strong><img src={gmail} alt="Logo" className="gmail-logo" /> Email:</strong>
-            <p>edwin.cordenete@gmail.com</p>
-          </div>
-          <div className="info-item">
-            <strong>📞 Phone:</strong>
-            <p>+639236652058</p>
-          </div>
-        </div>
-        
-  
-        <form onSubmit={handleSubmit} className="contact-form" noValidate>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Your Name"
-            required
-          />
 
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="name@example.com"
-            required
-          />
-
-          <textarea
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Your Message"
-            rows={6}
-            required
-          />
-
-          <button type="submit" disabled={loading} className="send-btn">
-            {loading ? 'Sending...' : 'Send Message'}
-          </button>
-
-        
-          {status && (
-            <p
-              role="status"
-              style={{
-                color: status.ok ? 'green' : 'red',
-                marginTop: '8px',
-                fontWeight: 'bold',
-              }}
-            >
-              {status.text}
-            </p>
-          )}
-        </form>
-      </div>
-    </div> */}
-    
-{/* FOOTER */}
-      
       <Footer />
     </div>
   );

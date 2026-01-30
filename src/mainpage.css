@@ -70,6 +70,13 @@
   color: #866a16;
 }
 
+.event-empty {
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #777;
+  font-style: italic;
+}
 
 
 /* .logo {
@@ -181,10 +188,10 @@
 .hero {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
-  gap: 72px;
+  gap: 60px;
   align-items: center;
 
-  padding: 140px 80px 100px;
+  padding: 80px 80px 20px;
   background: linear-gradient(
     to right,
     var(--primary-yellow-light),
@@ -198,7 +205,6 @@
   font-size: 24px;
   font-weight: 600;
   color: var(--yellow-primary);
-  background: rgba(179, 139, 0, 0.1);
   border-radius: 20px;
   margin-bottom: 18px;
 }
@@ -440,7 +446,6 @@
 /* Badge */
 .events-badge {
   /* display: inline-block; */
-  background: #e8f5e9;
   color: #2e7d32;
   font-size: 22px;
   font-weight: 600;

@@ -8,6 +8,9 @@
   import Header from "./header";
   import Footer from "./footer";
 
+  import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+
   const Contact = () => {
     const [formData, setFormData] = useState({
       companyName: '',
@@ -21,6 +24,19 @@
     });
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState(null);
+    const location = useLocation();
+
+    useEffect(() => {
+  // Check if a value was passed in the navigation state
+  const passedService = location.state?.selectedValue || location.state?.serviceType;
+  
+  if (passedService) {
+    setFormData(prev => ({
+      ...prev,
+      serviceType: passedService // This auto-fills the dropdown
+    }));
+  }
+}, [location]);
 
     const handleChange = (e) => {
       const { name, value } = e.target;
@@ -263,29 +279,39 @@
                   <label htmlFor="serviceType">
                     Service/Training Type <span className="required">*</span>
                   </label>
-                  <select
-                    id="serviceType"
-                    name="serviceType"
-                    value={formData.serviceType}
-                    onChange={handleChange}
-                  >
-                    <option value="">Select a service...</option>
-                    <option value="corporate-training">IT Consulting</option>
-                    <option value="consulting">Financial Advice / Literacy</option>
-                    <option value="excel-training">Network Security</option>
-                    <option value="data-analytics">Data Analytics</option>
-                    <option value="leadership">Software Development</option>
-                    <option value="custom">IT Strategy Consulting</option>
-                    <option value="corporate-training">Open Training Calendar</option>
-                    <option value="consulting">In-Company Training</option>
-                    <option value="excel-training">Computer Basics 101</option>
-                    <option value="data-analytics">Graphics Design</option>
-                    <option value="leadership">Web Design & Development</option>
-                    <option value="custom">CAD 2D Drawings & 3D Modelling</option>
-                    <option value="data-analytics">.NET Programming</option>
-                    <option value="leadership">Financial Planning & Management</option>
-                    <option value="other">Other</option>
-                  </select>
+ <select
+  id="serviceType"
+  name="serviceType"
+  value={formData.serviceType}
+  onChange={handleChange}
+>
+  <option value="">Select a service...</option>
+
+  {/* Services */}
+  <option value="IT Consulting">IT Consulting</option>
+  <option value="Financial Advice/Literacy">Financial Advice / Literacy</option>
+  <option value="Network Security">Network Security</option>
+  <option value="Data Analytics">Data Analytics</option>
+  <option value="Software Development">Software Development</option>
+  <option value="IT Strategy Consulting">IT Strategy Consulting</option>
+  <option value="Open Training Calendar">Open Training Calendar</option>
+  <option value="In-Company Training">In-Company Training</option>
+
+  {/* Trainings */}
+  <option value="Computer Basics 101">Computer Basics 101</option>
+  <option value="Graphics Design">Graphics Design</option>
+  <option value="Web Design & Development">Web Design & Development</option>
+  <option value="CAD 2D Drawings & 3D Modelling">
+    CAD 2D Drawings & 3D Modelling
+  </option>
+  <option value=".Net Programming">.Net Programming</option>
+  <option value="Financial Planning & Management">
+    Financial Planning & Management
+  </option>
+
+  <option value="Other">Other</option>
+</select>
+
                 </div>
 
                 <div className="cq-form-group">
