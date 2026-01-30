@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Success-and-Bright-Learning-Co./static/css/main.1178db7d.css",
-    "main.js": "/Success-and-Bright-Learning-Co./static/js/main.725212d4.js",
+    "main.js": "/Success-and-Bright-Learning-Co./static/js/main.eb475921.js",
     "static/js/453.754c8750.chunk.js": "/Success-and-Bright-Learning-Co./static/js/453.754c8750.chunk.js",
     "static/media/event4.png": "/Success-and-Bright-Learning-Co./static/media/event4.0f5abafe3f3094923339.png",
     "static/media/event13.PNG": "/Success-and-Bright-Learning-Co./static/media/event13.9f75068bbd6ea3c6eb31.PNG",
@@ -33,11 +33,11 @@
     "static/media/event1.jpg": "/Success-and-Bright-Learning-Co./static/media/event1.e0e56d0bce9011f36d1e.jpg",
     "index.html": "/Success-and-Bright-Learning-Co./index.html",
     "main.1178db7d.css.map": "/Success-and-Bright-Learning-Co./static/css/main.1178db7d.css.map",
-    "main.725212d4.js.map": "/Success-and-Bright-Learning-Co./static/js/main.725212d4.js.map",
+    "main.eb475921.js.map": "/Success-and-Bright-Learning-Co./static/js/main.eb475921.js.map",
     "453.754c8750.chunk.js.map": "/Success-and-Bright-Learning-Co./static/js/453.754c8750.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1178db7d.css",
-    "static/js/main.725212d4.js"
+    "static/js/main.eb475921.js"
   ]
 }
