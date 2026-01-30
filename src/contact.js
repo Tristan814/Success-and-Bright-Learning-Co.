@@ -27,13 +27,13 @@ import { useEffect } from 'react';
     const location = useLocation();
 
     useEffect(() => {
-  // Check if a value was passed in the navigation state
+
   const passedService = location.state?.selectedValue || location.state?.serviceType;
   
   if (passedService) {
     setFormData(prev => ({
       ...prev,
-      serviceType: passedService // This auto-fills the dropdown
+      serviceType: passedService 
     }));
   }
 }, [location]);
@@ -59,7 +59,7 @@ import { useEffect } from 'react';
 
       setLoading(true);
       try {
-        const res = await fetch("http://localhost:3005/send", {
+        const res = await fetch("http://localhost:3004/send", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

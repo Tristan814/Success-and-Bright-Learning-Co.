@@ -42,62 +42,6 @@ import { motion } from "framer-motion";
 import Header from "./header";
 import Footer from "./footer";
 
-// function Header() {
-//   const [hidden, setHidden] = useState(false);
-
-//   useEffect(() => {
-//     let last = 0;
-
-//     function handleScroll() {
-//       const current = window.pageYOffset;
-//       setHidden(current > last && current > 80);
-//       last = current;
-//     }
-
-//     window.addEventListener("scroll", handleScroll);
-//     return () => window.removeEventListener("scroll", handleScroll);
-//   }, []);
-
-//   return (
-//     <header className={`header ${hidden ? "hidden" : ""}`}>
-
-//       <Link to="/" className="logo-container">
-//         <img src={logo} alt="Success & Bright Learning Logo" className="logo-image" />
-//         <div className="logo-text">Success & Bright Learning</div>
-//       </Link>
-
-// <nav className="nav">
-//   <a href="#about">About Us</a>
-//   <a href="#services">Services</a>
-//   <a href="#training">Training Course</a>
-//   <a href="#events">Events</a>
-//   <a href="#testimonials">Testimonials</a>
-//   <Link to="/contact">Contact Us</Link>
-// </nav>
-
-//     </header>
-//   );
-// }
-//   return (
-//     <header className={`header ${hidden ? "hidden" : ""}`}>
-//       <div className="logo-container">
-//         <img src={logo} alt="Logo" className="logo-image" />
-//         <div className="logo-text">Success & Bright Learning</div>
-//       </div>
-
-//       <nav className="nav">
-//         <a href="#frontp">Home</a>
-//         <a href="#about">About Us</a>
-//         <a href="#services">Services</a>
-//         <a href="#training">Training Course</a>
-//         <a href="#events">Events</a>
-//         <a href="#testimonials">Testimonials</a>
-//         <a href="#contact">Contact Us</a>
-//       </nav>
-//     </header>
-//   );
-// }
-
 const eventSlides = [
   { id: 2, image: event2 },
   { id: 3, image: event3 },
@@ -147,9 +91,7 @@ const pastEvents = [
 
 const [currentUpcoming, setCurrentUpcoming] = useState(0);
 const upcomingEvents = [
-  // { title: "Science Fair 2026", text: "Present your innovative science experiments and win awards." },
-  // { title: "Web Design Workshop", text: "Learn how to design modern responsive websites." },
-  // { title: "STEM Robotics Expo", text: "A full-day expo showcasing the latest in robotics." }
+
 ];
 const hasUpcomingEvents = upcomingEvents.length > 0;
 const hasPastEvents = pastEvents.length > 0;
@@ -602,7 +544,7 @@ The learnings from various webinars conducted will provide a holistic approach t
                 Contact us at: <a href="mailto:edwin.cordenete@gmail.com">edwin.cordenete@gmail.com</a>
                 </p>
                 </div>
-                {/* <button className="primary-btn">Request Quote</button> */}
+
                 <Link 
                     to="/contact" 
                     state={{ selectedValue: selectedTraining.title }} // Passing the title here
@@ -627,8 +569,8 @@ The learnings from various webinars conducted will provide a holistic approach t
       <Swiper
         modules={[Navigation]}
         navigation
-        slidesPerView={1.2}        // 👈 shows next/prev peeks
-        centeredSlides={true}     // 👈 keeps active centered
+        slidesPerView={1.2}        
+        centeredSlides={true}    
         spaceBetween={20}
         className="events-swiper"
       >

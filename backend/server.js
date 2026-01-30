@@ -45,14 +45,15 @@ app.post("/send", async (req, res) => {
 
   const { html, text } = generateEmailContent(req.body);
 
-  const mailOptions = {
-    from: `"Success & Bright Learning" <tristanaquino814@gmail.com>`,
-    to: "tristanaquino814@gmail.com",
-    replyTo: email,
-    subject: `New Quotation Request – ${companyName}`,
-    html,
-    text,
-  };
+const mailOptions = {
+  from: '"Success & Bright Learning" <tristanaquino814@gmail.com>',
+  to: 'success.bright2020@gmail.com',
+  replyTo: email,
+  subject: `New Quotation Request – ${companyName}`,
+  html,
+  text,
+};
+
 
   try {
     await transporter.sendMail(mailOptions);
@@ -66,6 +67,6 @@ app.post("/send", async (req, res) => {
   }
 });
 
-app.listen(3005, () => {
-  console.log("🚀 Server running on http://localhost:3005");
+app.listen(3004, () => {
+  console.log("🚀 Server running on http://localhost:3004");
 });
