@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
-import { generateEmailContent } from "../backend/emailtemplate.js";
+import { generateEmailContent } from "./emailtemplate.js";
+
 
 
 export default async function handler(req, res) {
