@@ -14,9 +14,9 @@
 }
 
 :root {
-  --yellow-main: #b38b00;      /* dark corporate yellow */
-  --yellow-hover: #e0b400;     /* bright hover */
-  --yellow-soft: #fff7d6;      /* background accent */
+  --yellow-main: #b38b00;      
+  --yellow-hover: #e0b400;    
+  --yellow-soft: #fff7d6;     
   --text-dark: #2b2b2b;
   --border-light: #e6e6e6;
 }
@@ -79,11 +79,6 @@
 }
 
 
-/* .logo {
-  font-size: 24px;
-  font-weight: bold;
-} */
-
 .nav {
   display: flex;
   align-items: center;
@@ -137,54 +132,6 @@
   display: none;
 }
 
-
-
-
-/* HERO SECTION */
-/* .frontp {
-  position: relative;
-  text-align: center;
-  padding: 120px 20px;
-  color: white;
-
-
-  background: linear-gradient(135deg, #4b7b2c 0%, #2e8b57 100%);
-  overflow: hidden;
-}
-
-
-.logo-bg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 600px;         
-  height: 450px;        
-  background-image: url('./assets/SABLCO_logo.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.30;    
-  transform: translate(-50%, -50%);
-  z-index: 0;
-}
-
-
-.frontp h1, 
-.frontp p {
-  position: relative;
-  z-index: 2;
-}
-
-.frontp h1 {
-  font-size: 48px;
-  font-weight: bold;
-  margin-bottom: 25px;
-}
-
-.frontp p {
-  font-size: 22px;
-  margin-bottom: 10px;
-} */
 .hero {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -331,31 +278,7 @@
   align-items: flex-start;
 }
 
-/* LEFT */
-/* .events-left {
-  flex: 1;
-  max-width: 50%;
-  display: flex;
-}
 
-.events-swiper {
-  width: 100%;
-  height: 380px;
-}
-
-.swiper-slide {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.event-slide-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;     
-  object-position: center;
-  border-radius: 12px;
-} */
 
 /* LEFT CONTAINER */
 .events-left {
@@ -399,7 +322,7 @@
 .event-slide-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;     /* NO cropping */
+  object-fit: contain;    
   object-position: center;
 }
 
@@ -438,14 +361,14 @@
   padding: 28px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
 
-    height: 485px;            /* 👈 match left image height */
+    height: 485px;           
   display: flex;
   flex-direction: column;
 }
 
 /* Badge */
 .events-badge {
-  /* display: inline-block; */
+ 
   color: #2e7d32;
   font-size: 22px;
   font-weight: 600;
@@ -456,7 +379,7 @@
 
 .events-badge,
 .switch-mode-btn {
-  align-self: center;   /* or flex-start if you prefer left aligned */
+  align-self: center;  
   width: auto;
 }
 
@@ -475,16 +398,11 @@
   margin-bottom: 20px;
 }
 
-/* List */
-/* .events-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-} */
+
 .events-list {
-  flex: 1;                  /* fills remaining space */
-  overflow-y: auto;         /* enables scroll */
-  min-height: 0;            /* 🔥 REQUIRED */
+  flex: 1;               
+  overflow-y: auto;    
+  min-height: 0;            
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -598,10 +516,6 @@
 }
 
 .testimonial-box {
-  /* background: #f4f4f4;
-  padding: 50px 25px 30px;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08); */
   position: relative;
   background: #ffffff;
   padding: 110px 40px 40px;
@@ -629,16 +543,7 @@
 
 /* Avatar */
 .avatar {
-  /* position: absolute;
-  top: -35px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  border: 4px solid #fff;
-  overflow: hidden;
-  background: #fff; */
+
   position: absolute;
   top: -70px;
   left: 50%;
@@ -653,9 +558,7 @@
 }
 
 .avatar img {
-  /* width: 100%;
-  height: 100%;
-  object-fit: cover; */
+
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -1397,8 +1300,7 @@
   margin-top: -40px;
   display: block;
   
-  /* This helps remove white but keeps colors closer to original */
-  /* Note: This only works if the logo is significantly darker than white */
+  
   background-blend-mode: screen; 
   
   /* If the logo is still dark, try adding brightness */

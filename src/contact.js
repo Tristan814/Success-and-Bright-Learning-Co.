@@ -59,13 +59,14 @@ import { useEffect } from 'react';
 
       setLoading(true);
       try {
-        const res = await fetch("http://localhost:3004/send", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
+        const res = await fetch("/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
 
         const data = await res.json();
 
