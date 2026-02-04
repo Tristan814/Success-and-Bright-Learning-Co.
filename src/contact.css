@@ -429,63 +429,95 @@
   transform: scale(1.1);
 }
 
-/* Responsive Design */
-@media (max-width: 968px) {
+/* ============================================================
+   ENHANCED RESPONSIVENESS FOR CONTACT PAGE
+   ============================================================ */
+
+/* IPADS & TABLETS (769px to 1024px) */
+@media (max-width: 1024px) {
   .cq-header-content {
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-  }
-
-  .cq-nav {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-  }
-
-  .cq-header-info {
-    flex-direction: column;
-    gap: 10px;
-    padding: 15px;
-  }
-
-  .cq-hero h1 {
-    font-size: 36px;
-  }
-
-  .cq-hero p {
-    font-size: 18px;
-  }
-
-  .cq-main-container {
-    padding: 60px 20px;
+    padding: 15px 30px;
   }
 
   .cq-content-wrapper {
-    grid-template-columns: 1fr;
+    /* Reduce the gap so things don't look too spread out */
     gap: 30px;
-  }
-
-  .cq-form-row {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 640px) {
-  .cq-logo-text {
-    font-size: 1rem;
-  }
-
-  .cq-nav a {
-    font-size: 15px;
-  }
-
-  .cq-hero {
-    padding: 60px 20px;
+    padding: 0 10px;
   }
 
   .cq-hero h1 {
-    font-size: 28px;
+    font-size: 42px;
+  }
+
+  .cq-info-card, .cq-form-card {
+    padding: 30px;
+  }
+}
+
+/* MOBILE PHONES (Up to 768px) */
+@media (max-width: 768px) {
+  /* Stack the Info Card and Form Card */
+  .cq-content-wrapper {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* Make Hero more compact */
+  .cq-hero {
+    padding: 80px 20px 40px;
+  }
+
+  .cq-hero-content {
+    padding-top: 40px;
+  }
+
+  .cq-hero h1 {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  /* Hide extra header info on small screens to save space */
+  .cq-header-info {
+    display: none; 
+  }
+
+  /* Center items in the info card for better mobile flow */
+  .cq-info-card {
+    text-align: center;
+  }
+
+  .cq-info-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .cq-social-links {
+    align-items: center;
+  }
+
+  /* Ensure inputs don't zoom in on iOS */
+  .cq-form-group input, 
+  .cq-form-group textarea, 
+  .cq-form-group select {
+    font-size: 16px; 
+  }
+}
+
+/* SMALL PHONES (Up to 480px) */
+@media (max-width: 480px) {
+  .cq-header-content {
+    padding: 15px;
+  }
+
+  .cq-logo-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .cq-hero h1 {
+    font-size: 26px;
   }
 
   .cq-hero p {
@@ -493,25 +525,17 @@
   }
 
   .cq-main-container {
-    padding: 40px 15px;
+    padding: 30px 10px;
   }
 
-  .cq-info-card,
-  .cq-form-card {
-    padding: 25px;
-  }
-
-  .cq-info-card h2,
-  .cq-form-card h2 {
-    font-size: 24px;
-  }
-
+  /* Make the submit button full width for easier tapping */
   .cq-submit-btn {
-    padding: 16px 30px;
-    font-size: 16px;
+    width: 100%;
+    padding: 16px;
   }
 
-  .cq-footer-brand {
-    flex-direction: column;
+  .cq-footer-brand h3 {
+    font-size: 20px;
   }
+
 }
