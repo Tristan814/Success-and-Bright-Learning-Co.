@@ -512,9 +512,20 @@ The learnings from various webinars conducted will provide a holistic approach t
 
       {/* Training Modal */}
       {selectedTraining && (
-        <div className="modal-overlay" onClick={() => setSelectedTraining(null)}>
-          <div className="modal-content training-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="close-btn" onClick={() => setSelectedTraining(null)}>×</button>
+        <motion.div
+          className="modal-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setSelectedTraining(null)}
+        >
+          <motion.div
+            className="modal-content training-modal"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            onClick={(e) => e.stopPropagation()}
+          >
             
             <div className="modal-header training-header">
               <div className="training-icon-large">{selectedTraining.icon}</div>
@@ -557,8 +568,9 @@ The learnings from various webinars conducted will provide a holistic approach t
                   </Link>
               </div>
             </div>
-          </div>
-        </div>
+                        <button className="close-btn" onClick={() => setSelectedTraining(null)}>×</button>
+          </motion.div>
+        </motion.div>
       )}
 
 {/* EVENTS SECTION */}
