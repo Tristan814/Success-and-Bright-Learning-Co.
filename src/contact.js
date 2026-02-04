@@ -1,6 +1,5 @@
   import React, { useState } from 'react';
   import './contact.css'
-  import logo from './assets/SABLCO_logo.png';
   import facebook from './assets/facebook-icon.png';
   import gmail from './assets/gmail.png';
   import youtube from './assets/youtube-icon.png';

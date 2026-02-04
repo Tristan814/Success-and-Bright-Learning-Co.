@@ -1,6 +1,5 @@
-import React from "react";
+
 import './mainpage.css'
-import logo from './assets/SABLCO_logo.png'
 import internship from './assets/internship prog.webp'
 import aboutIMG from './assets/aboutIMG.webp'
 import DataAnalytics from "./assets/DataAnalytics.jpg";
@@ -11,9 +10,6 @@ import SoftwareDev from "./assets/SoftwareDev.jpg";
 import InCompanyT from "./assets/In-CompanyT.jpg";
 import ITStrategy from "./assets/ITStrat.jpg";
 import OpenCalendar from "./assets/Open-CalendarT.jpg";
-import youtube from "./assets/youtube-icon.png";
-import facebook from "./assets/facebook-icon.png";
-import event1 from "./assets/event1.jpg";
 import event2 from "./assets/event2.jpg";
 import event3 from "./assets/event3.jpg";
 import event4 from "./assets/event4.png";
