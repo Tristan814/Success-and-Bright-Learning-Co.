@@ -412,6 +412,7 @@ The learnings from various webinars conducted will provide a holistic approach t
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4 }}
+              onClick={() => setSelectedService(service)}
             >
               <img src={service.image} alt={service.title} className="image-service" />
               <h3>{service.title}</h3>
@@ -428,7 +429,13 @@ The learnings from various webinars conducted will provide a holistic approach t
         <h2>Our Training Courses</h2>
         <div className="training-grid landscape">
           {trainings.map((training) => (
-            <div 
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
               key={training.id}
               className="training-card landscape-card"
               onClick={() => setSelectedTraining(training)}
@@ -441,7 +448,7 @@ The learnings from various webinars conducted will provide a holistic approach t
                 <p>{training.shortDesc}</p>
                 <button className="learn-more-btn">View Details →</button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
