@@ -53,7 +53,7 @@ function Footer() {
           <div className="contact-details">
             <p><strong>Address:</strong> 452 Cabildo St, Intramuros, Manila, 1014 Metro Manila, Philippines</p>
             <p><strong>Phone:</strong> +63 923 665 2058</p>
-            <p><strong>Email:</strong> edwin.cordenete@gmail.com</p>
+            <p><strong>Email:</strong> success.bright2020@gmail.com</p>
           </div>
           
           <div className="social-icons">
@@ -63,8 +63,8 @@ function Footer() {
             <a href="https://www.youtube.com/@SuccessBrightLearning" target="_blank" rel="noopener noreferrer">
               <img src={youtube} alt="YouTube" className="social-img-colored" />
             </a>
-            <a href="mailto:edwin.cordenete@gmail.com">
-              <img src={gmail} alt="Gmail" className="social-img-colored" />
+            <a href="mailto:success.bright2020@gmail.com">
+              <img src={gmail} alt="Gmail" className="social-img-colored-email" />
             </a>
           </div>
         </div>

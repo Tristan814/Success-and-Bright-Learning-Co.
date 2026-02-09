@@ -492,8 +492,8 @@ The learnings from various webinars conducted will provide a holistic approach t
                 <div className="service-row">
                 <p className="contact-info">
                  
-                <img className="gmail-service" src={gmail} alt="Facebook" />
-                Contact us at: <a href="mailto:edwin.cordenete@gmail.com">edwin.cordenete@gmail.com</a>
+            
+                Contact us at: <a href="mailto:success.bright2020@gmail.com">success.bright2020@gmail.com</a>
                 </p>
                 </div>
                 {/* <button className="primary-btn">Request Quote</button> */}
@@ -553,9 +553,8 @@ The learnings from various webinars conducted will provide a holistic approach t
               <div className="modal-footer">
                 <div className="service-row">
                 <p className="contact-info">
-                 
-                <img className="gmail-service" src={gmail} alt="Facebook" />
-                Contact us at: <a href="mailto:edwin.cordenete@gmail.com">edwin.cordenete@gmail.com</a>
+                
+                Contact us at: <a href="mailto:success.bright2020@gmail.com">success.bright2020@gmail.com</a>
                 </p>
                 </div>
 

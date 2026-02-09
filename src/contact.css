@@ -208,9 +208,16 @@
 }
 
 .cq-social-links img {
-  width: 36px;
-  height: 36px;
+  width: 45px;
+  height: 45px;
   border-radius: 8px;
+}
+
+.cq-social-links img.social-icon-email {
+  width: 35px; 
+  height: 35px;
+  /* Add margin to keep the text aligned with the larger boxes */
+  margin: 3px; 
 }
 
 
@@ -345,11 +352,7 @@
     transform: translateY(0);
   }
 }
-.social-icon {
-  width: 10px;      /* ← adjust here */
-  height: 10px;
-  object-fit: contain;
-}
+
 .cq-status-message.success {
   background-color: #e8f5e9;
   color: #2e7d32;
@@ -492,7 +495,6 @@
     text-align: center;
     gap: 10px;
   }
-
   .cq-social-links {
     align-items: center;
   }

@@ -133,7 +133,7 @@ import { useEffect } from 'react';
                   </div>
                   <div className="cq-info-text">
                     <strong>Email</strong>
-                    <p>edwin.cordenete@gmail.com</p>
+                    <p>success.bright2020@gmail.com</p>
                   </div>
                 </div>
 
@@ -165,8 +165,8 @@ import { useEffect } from 'react';
                     <span>Facebook</span>
                   </a>
 
-                  <a href="mailto:edwin.cordenete@gmail.com">
-                    <img src={gmail} alt="Email" className="social-icon" />
+                  <a href="mailto:success.bright2020@gmail.com">
+                    <img src={gmail} alt="Email" className="social-icon-email" />
                     <span>Email</span>
                   </a>
 
